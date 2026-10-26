@@ -1,0 +1,3675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medinest - Healthcare Platform</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#f3f8f8;
+    color:#163b43;
+}
+
+/* ================= LOGIN ================= */
+
+#loginScreen{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#063c45,#087f82,#12a89c);
+    padding:20px;
+}
+
+.login-box{
+    width:430px;
+    max-width:100%;
+    background:white;
+    border-radius:25px;
+    padding:35px;
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.logo-area{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.logo{
+    width:70px;
+    height:70px;
+    margin:auto;
+    border-radius:20px;
+    background:linear-gradient(135deg,#00a99d,#087f82);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:38px;
+    font-weight:bold;
+}
+
+.logo-area h1{
+    margin-top:12px;
+    color:#075e65;
+    font-size:30px;
+}
+
+.logo-area p{
+    color:#71858a;
+    margin-top:5px;
+}
+
+.login-title{
+    font-size:21px;
+    margin-bottom:8px;
+}
+
+.login-subtitle{
+    color:#71858a;
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+.input-group{
+    margin-bottom:15px;
+}
+
+.input-group label{
+    display:block;
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.input-group input{
+    width:100%;
+    padding:13px;
+    border:1px solid #d5e1e3;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+}
+
+.input-group input:focus{
+    border-color:#079b94;
+}
+
+.phone-row{
+    display:flex;
+    gap:8px;
+}
+
+.country-code{
+    width:75px !important;
+    background:#f3f7f7;
+    text-align:center;
+}
+
+.btn{
+    border:none;
+    border-radius:10px;
+    padding:13px 18px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:bold;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-1px);
+}
+
+.btn-primary{
+    width:100%;
+    background:#078f8b;
+    color:white;
+}
+
+.btn-secondary{
+    width:100%;
+    background:#e9f5f4;
+    color:#06706e;
+    margin-top:10px;
+}
+
+.btn-danger{
+    background:#ef5350;
+    color:white;
+}
+
+.otp-section{
+    display:none;
+    margin-top:18px;
+}
+
+#recaptcha-container{
+    margin:15px 0;
+}
+
+.admin-login{
+    display:none;
+    margin-top:20px;
+    padding-top:20px;
+    border-top:1px solid #e5eeee;
+}
+
+.small-link{
+    text-align:center;
+    margin-top:15px;
+    color:#087f82;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.back-user{
+    text-align:center;
+    margin-top:12px;
+    color:#087f82;
+    cursor:pointer;
+    font-size:14px;
+}
+
+#loginMessage{
+    margin-top:12px;
+    text-align:center;
+    font-size:14px;
+    min-height:20px;
+}
+
+.success{
+    color:#138a54;
+}
+
+.error{
+    color:#d93636;
+}
+
+/* ================= APP ================= */
+
+#app{
+    display:none;
+    min-height:100vh;
+}
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:245px;
+    background:linear-gradient(180deg,#073d46,#075d65);
+    color:white;
+    padding:22px 15px;
+    z-index:100;
+}
+
+.sidebar-logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:5px 10px 25px;
+}
+
+.sidebar-logo .mini-logo{
+    width:42px;
+    height:42px;
+    background:#13b7a6;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:23px;
+    font-weight:bold;
+}
+
+.sidebar-logo h2{
+    font-size:22px;
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+
+.menu button{
+    border:none;
+    background:transparent;
+    color:#d8eeee;
+    text-align:left;
+    padding:12px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.menu button:hover,
+.menu button.active{
+    background:rgba(255,255,255,.14);
+    color:white;
+}
+
+.logout-side{
+    position:absolute;
+    bottom:20px;
+    left:15px;
+    right:15px;
+}
+
+.main{
+    margin-left:245px;
+    min-height:100vh;
+}
+
+.topbar{
+    height:72px;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 28px;
+    box-shadow:0 2px 12px rgba(0,0,0,.05);
+    position:sticky;
+    top:0;
+    z-index:50;
+}
+
+.page-title{
+    font-size:21px;
+    font-weight:bold;
+}
+
+.top-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.cart-top{
+    background:#e8f7f5;
+    border:none;
+    color:#087c78;
+    padding:10px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.cart-count{
+    background:#ef5350;
+    color:white;
+    border-radius:50%;
+    padding:2px 7px;
+    font-size:11px;
+}
+
+.user-info{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.avatar{
+    width:38px;
+    height:38px;
+    background:#dff5f2;
+    color:#087c78;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.content{
+    padding:28px;
+}
+
+.section{
+    display:none;
+}
+
+.section.active{
+    display:block;
+}
+
+.welcome{
+    background:linear-gradient(135deg,#07515b,#079b94);
+    color:white;
+    border-radius:20px;
+    padding:25px;
+    margin-bottom:25px;
+}
+
+.welcome h1{
+    margin-bottom:8px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.stat-card{
+    background:white;
+    padding:20px;
+    border-radius:16px;
+    box-shadow:0 5px 18px rgba(0,0,0,.05);
+}
+
+.stat-card h4{
+    color:#71858a;
+    font-size:13px;
+}
+
+.stat-card strong{
+    display:block;
+    font-size:28px;
+    margin-top:8px;
+    color:#075e65;
+}
+
+.card{
+    background:white;
+    border-radius:17px;
+    padding:22px;
+    box-shadow:0 5px 18px rgba(0,0,0,.05);
+    margin-bottom:20px;
+}
+
+.card h2{
+    margin-bottom:16px;
+    color:#075e65;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.doctor-card,
+.pharmacy-card,
+.medicine-card{
+    background:white;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+.doctor-icon{
+    width:60px;
+    height:60px;
+    border-radius:15px;
+    background:#e2f6f3;
+    color:#087f82;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    margin-bottom:12px;
+}
+
+.doctor-card h3{
+    margin-bottom:5px;
+}
+
+.doctor-card .speciality{
+    color:#078f8b;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.doctor-info{
+    color:#71858a;
+    font-size:13px;
+    line-height:1.8;
+    margin:10px 0;
+}
+
+.rating{
+    color:#e39b00;
+    margin-bottom:10px;
+}
+
+.price{
+    font-size:20px;
+    font-weight:bold;
+    color:#075e65;
+    margin:8px 0 14px;
+}
+
+.card-actions{
+    display:flex;
+    gap:8px;
+}
+
+.card-actions button{
+    flex:1;
+}
+
+.search-bar{
+    width:100%;
+    padding:13px;
+    border:1px solid #d5e1e3;
+    border-radius:10px;
+    margin-bottom:20px;
+    outline:none;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.form-group{
+    margin-bottom:12px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:6px;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #d5e1e3;
+    border-radius:9px;
+    outline:none;
+}
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:12px;
+    border-bottom:1px solid #e5eeee;
+    text-align:left;
+    font-size:13px;
+}
+
+th{
+    color:#075e65;
+}
+
+.badge{
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:11px;
+    background:#e4f7f3;
+    color:#087c78;
+}
+
+.empty{
+    text-align:center;
+    padding:35px;
+    color:#71858a;
+}
+
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    padding:15px 0;
+    border-bottom:1px solid #e5eeee;
+}
+
+.qty{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.qty button{
+    width:28px;
+    height:28px;
+    border:none;
+    border-radius:7px;
+    background:#e4f4f2;
+    color:#087c78;
+    cursor:pointer;
+}
+
+.total-box{
+    text-align:right;
+    padding-top:18px;
+}
+
+.total-box strong{
+    font-size:24px;
+    color:#075e65;
+}
+
+.emergency{
+    background:#fff0f0;
+    border:1px solid #ffd2d2;
+    border-radius:18px;
+    padding:25px;
+}
+
+.emergency h2{
+    color:#d93636;
+}
+
+.profile-avatar{
+    width:85px;
+    height:85px;
+    background:#dff5f2;
+    color:#087c78;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:34px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.admin-only{
+    display:none;
+}
+
+.mobile-menu{
+    display:none;
+}
+
+/* ================= TOAST ================= */
+
+#toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#073d46;
+    color:white;
+    padding:14px 20px;
+    border-radius:10px;
+    display:none;
+    z-index:999;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1000px){
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:700px){
+    .sidebar{
+        width:220px;
+        transform:translateX(-100%);
+        transition:.3s;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .mobile-menu{
+        display:block;
+        background:none;
+        border:none;
+        font-size:23px;
+        cursor:pointer;
+        margin-right:10px;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .content{
+        padding:15px;
+    }
+
+    .stats,
+    .grid,
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .user-info span{
+        display:none;
+    }
+}
+
+
+/* ================= UPI PAYMENT ================= */
+.payment-modal{
+    position:fixed;inset:0;background:rgba(5,35,40,.62);display:none;
+    align-items:center;justify-content:center;padding:20px;z-index:9999;
+}
+.payment-modal.show{display:flex;}
+.payment-box{
+    width:720px;max-width:100%;max-height:92vh;overflow:auto;background:#fff;
+    border-radius:24px;padding:28px;box-shadow:0 25px 70px rgba(0,0,0,.28);
+}
+.payment-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px;}
+.payment-close{border:0;background:#eef6f6;width:38px;height:38px;border-radius:50%;font-size:22px;cursor:pointer;color:#163b43;}
+.payment-amount{background:#eaf9f6;border:1px solid #c9eee7;border-radius:18px;padding:16px;text-align:center;margin-bottom:20px;}
+.payment-amount small{display:block;color:#668086;margin-bottom:4px;}
+.payment-amount strong{font-size:30px;color:#087f82;}
+.upi-layout{display:grid;grid-template-columns:260px 1fr;gap:24px;align-items:start;}
+.qr-card{border:1px solid #dce9e9;border-radius:18px;padding:18px;text-align:center;background:#fff;}
+#upiQr{display:flex;justify-content:center;align-items:center;min-height:210px;margin:8px auto 12px;}
+#upiQr img,#upiQr canvas{max-width:210px!important;width:100%!important;height:auto!important;}
+.upi-id{font-size:13px;color:#6d8185;word-break:break-all;}
+.upi-apps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px;}
+.upi-app{border:1px solid #d9e7e7;background:#fff;border-radius:14px;padding:12px 10px;cursor:pointer;font-weight:700;color:#244a51;display:flex;align-items:center;gap:9px;transition:.2s;}
+.upi-app:hover{transform:translateY(-2px);box-shadow:0 7px 18px rgba(0,0,0,.08);border-color:#12a89c;}
+.upi-logo{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:#edf8f7;font-size:12px;color:#087f82;font-weight:800;}
+.payment-note{font-size:12px;color:#71858a;line-height:1.5;margin-top:12px;}
+.payment-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;}
+@media(max-width:650px){.upi-layout{grid-template-columns:1fr}.upi-apps{grid-template-columns:1fr 1fr}.payment-box{padding:20px}}
+
+
+/* ================= HEALTHMATE FEATURES ================= */
+.healthmate-banner{background:linear-gradient(135deg,#073b43,#087f82);color:#fff;border-radius:20px;padding:22px;margin-bottom:20px;box-shadow:0 12px 30px rgba(8,127,130,.18)}
+.healthmate-banner h2{margin:0 0 8px;font-size:24px}.healthmate-banner p{margin:0;opacity:.92;line-height:1.6}
+.reminder-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.reminder-card{border:1px solid #dceaea;border-radius:16px;padding:16px;background:#fff}.reminder-card h3{margin:0 0 6px;color:#163b43}.reminder-meta{font-size:13px;color:#71858a;line-height:1.7}.reminder-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.payment-methods{margin-top:20px}.payment-method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}.payment-method{border:1px solid #d8e8e8;background:#fff;border-radius:14px;padding:13px;text-align:left;cursor:pointer;transition:.2s}.payment-method:hover{border-color:#0a8587;transform:translateY(-1px)}.payment-method strong{display:block;color:#163b43}.payment-method span{font-size:12px;color:#71858a}.gateway-note{font-size:12px;color:#71858a;line-height:1.5;margin-top:10px;padding:10px;background:#f5fafa;border-radius:10px}
+.admin-payment-box{border:1px solid #d8e8e8;border-radius:16px;padding:16px;margin-top:18px;background:#f8fcfc}.admin-payment-box code{word-break:break-all}
+@media(max-width:650px){.reminder-grid,.payment-method-grid{grid-template-columns:1fr}}
+
+
+.delivery-box{margin-top:18px;border:1px solid #dce9e9;border-radius:16px;padding:16px;background:#f8fcfc}.delivery-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.delivery-summary{margin-top:12px;padding:14px;border-radius:14px;background:#fff;border:1px solid #e3eeee}.delivery-summary div{display:flex;justify-content:space-between;gap:12px;margin:6px 0}.delivery-free{color:#138a54;font-weight:800}.bank-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.bank-note{font-size:12px;color:#71858a;line-height:1.5;margin-top:10px;padding:12px;background:#f5fafa;border-radius:12px}.admin-bank-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+@media(max-width:650px){.delivery-grid,.bank-grid{grid-template-columns:1fr}}
+</style>
+</head>
+
+<body>
+
+<!-- ================= LOGIN SCREEN ================= -->
+
+<div id="loginScreen">
+
+<div class="login-box">
+
+    <div class="logo-area">
+        <div class="logo">♥</div>
+        <h1>Medinest</h1>
+        <p>Your Healthcare Companion</p>
+    </div>
+
+    <!-- PATIENT LOGIN: phone required, email/password optional -->
+    <div id="userLogin">
+        <div class="login-title">Patient Login</div>
+        <div class="login-subtitle">Enter your name, mobile number, and password. Email address is optional.</div>
+        <div class="input-group">
+            <label for="patientLoginName">Full Name *</label>
+            <input id="patientLoginName" type="text" autocomplete="name" placeholder="Enter your full name" required>
+        </div>
+        <div class="input-group">
+            <label for="patientPhone">Mobile Number *</label>
+            <div class="phone-row">
+                <input class="country-code" value="+91" readonly aria-label="Country code">
+                <input id="patientPhone" type="tel" inputmode="numeric" maxlength="10" autocomplete="tel-national" placeholder="Enter 10-digit mobile number">
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="patientEmail">Email Address (Optional)</label>
+            <input id="patientEmail" type="email" autocomplete="email" placeholder="Enter email address (optional)">
+        </div>
+        <div class="input-group">
+            <label for="patientPassword">Password *</label>
+            <input id="patientPassword" type="password" autocomplete="current-password" placeholder="Enter password" required>
+        </div>
+        <button class="btn btn-primary" onclick="patientLogin()">Login</button>
+        <div class="small-link" onclick="showPatientRegister()">New patient? Create Account</div>
+        <div class="small-link" onclick="showAdminLogin()">Administrator Login</div>
+        <div id="patientRegister" style="display:none;margin-top:18px;border-top:1px solid #e5eeee;padding-top:18px;">
+            <div class="login-title">Create Account</div>
+            <div class="input-group"><label for="registerName">Full Name *</label><input id="registerName" type="text" placeholder="Enter full name"></div>
+            <div class="input-group"><label for="registerPhone">Mobile Number *</label><input id="registerPhone" type="tel" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number"></div>
+            <div class="input-group"><label for="registerEmail">Email (Optional)</label><input id="registerEmail" type="email" placeholder="Email address"></div>
+            <div class="input-group"><label for="registerPassword">Password *</label><input id="registerPassword" type="password" minlength="6" placeholder="At least 6 characters"></div>
+            <div class="input-group"><label for="registerConfirmPassword">Confirm Password *</label><input id="registerConfirmPassword" type="password" minlength="6" placeholder="Re-enter password"></div>
+            <button class="btn btn-primary" onclick="createPatientAccount()">Create Account</button>
+            <div class="small-link" onclick="hidePatientRegister()">Back to Login</div>
+        </div>
+    </div>
+
+    <!-- ADMIN LOGIN -->
+
+    <div id="adminLogin" class="admin-login">
+
+        <div class="login-title">Administrator Login</div>
+
+        <div class="login-subtitle">
+            Authorized Medinest administrators only.
+        </div>
+
+        <div class="input-group">
+            <label>Username</label>
+            <input
+                id="adminUsername"
+                type="text"
+                placeholder="Enter admin username">
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input
+                id="adminPassword"
+                type="password"
+                placeholder="Enter admin password">
+        </div>
+
+        <button
+            class="btn btn-primary"
+            onclick="adminLogin()">
+            Login as Administrator
+        </button>
+
+        <div class="back-user" onclick="showUserLogin()">
+            ← Back to Patient Login
+        </div>
+
+    </div>
+
+    <div id="loginMessage"></div>
+
+</div>
+</div>
+
+
+<!-- ================= MAIN APP ================= -->
+
+<div id="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-logo">
+            <div class="mini-logo">♥</div>
+            <h2>Medinest</h2>
+        </div>
+
+        <div class="menu">
+
+            <button class="active" onclick="showSection('dashboard',this)">
+                🏠 Dashboard
+            </button>
+
+            <button onclick="showSection('doctors',this)">
+                👨‍⚕️ Doctors
+            </button>
+
+            <button onclick="showSection('appointments',this)">
+                📅 Appointments
+            </button>
+
+            <button onclick="showSection('pharmacy',this)">
+                💊 Pharmacy
+            </button>
+
+            <button onclick="showSection('reminders',this)">
+                ⏰ Medicine Reminders
+            </button>
+
+            <button onclick="showSection('prescriptions',this)">
+                📋 Prescriptions
+            </button>
+
+            <button onclick="showSection('records',this)">
+                🏥 Health Records
+            </button>
+
+            <button onclick="showSection('emergency',this)">
+                🚨 Emergency
+            </button>
+
+            <button onclick="showSection('profile',this)">
+                👤 Profile
+            </button>
+
+            <button
+                id="adminMenu"
+                class="admin-only"
+                onclick="showSection('admin',this)">
+                ⚙️ Manage System
+            </button>
+
+        </div>
+
+        <div class="logout-side">
+            <button
+                class="menu button"
+                style="width:100%;background:#ef5350;color:white;"
+                onclick="logout()">
+                🚪 Logout
+            </button>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div style="display:flex;align-items:center;">
+                <button
+                    class="mobile-menu"
+                    onclick="toggleSidebar()">
+                    ☰
+                </button>
+
+                <div class="page-title" id="pageTitle">
+                    Dashboard
+                </div>
+            </div>
+
+            <div class="top-right">
+
+                <button
+                    class="cart-top"
+                    onclick="showSectionByName('cart')">
+                    🛒 Cart
+                    <span id="cartCount" class="cart-count">0</span>
+                </button>
+
+                <div class="user-info">
+                    <div class="avatar" id="headerAvatar">U</div>
+                    <span id="headerUser">Patient</span>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <div class="content">
+
+            <!-- ================= DASHBOARD ================= -->
+
+            <section id="dashboard" class="section active">
+
+                <div class="welcome">
+                    <h1 id="welcomeText">Welcome to Medinest 👋</h1>
+                    <p>
+                        Manage your healthcare, appointments,
+                        prescriptions and medicines in one place.
+                    </p>
+                </div>
+
+                <div class="stats">
+
+                    <div class="stat-card">
+                        <h4>Doctors</h4>
+                        <strong id="doctorCount">8</strong>
+                    </div>
+
+                    <div class="stat-card">
+                        <h4>Appointments</h4>
+                        <strong id="appointmentCount">0</strong>
+                    </div>
+
+                    <div class="stat-card">
+                        <h4>Prescriptions</h4>
+                        <strong id="prescriptionCount">3</strong>
+                    </div>
+
+                    <div class="stat-card">
+                        <h4>Cart Items</h4>
+                        <strong id="dashboardCartCount">0</strong>
+                    </div>
+
+                    <div class="stat-card">
+                        <h4>Medicine Reminders</h4>
+                        <strong id="reminderCount">0</strong>
+                    </div>
+
+                </div>
+
+                <div class="card">
+
+                    <h2>Quick Services</h2>
+
+                    <div class="grid">
+
+                        <div class="doctor-card">
+                            <div class="doctor-icon">👨‍⚕️</div>
+                            <h3>Find a Doctor</h3>
+                            <p class="doctor-info">
+                                Search verified doctors and book an appointment.
+                            </p>
+                            <button
+                                class="btn btn-primary"
+                                onclick="showSectionByName('doctors')">
+                                View Doctors
+                            </button>
+                        </div>
+
+                        <div class="doctor-card">
+                            <div class="doctor-icon">💊</div>
+                            <h3>Online Pharmacy</h3>
+                            <p class="doctor-info">
+                                Browse medicines and add them to your cart.
+                            </p>
+                            <button
+                                class="btn btn-primary"
+                                onclick="showSectionByName('pharmacy')">
+                                Open Pharmacy
+                            </button>
+                        </div>
+
+                        <div class="doctor-card">
+                            <div class="doctor-icon">🚨</div>
+                            <h3>Emergency</h3>
+                            <p class="doctor-info">
+                                Get emergency contact information quickly.
+                            </p>
+                            <button
+                                class="btn btn-danger"
+                                onclick="showSectionByName('emergency')">
+                                Emergency
+                            </button>
+                        </div>
+
+                        <div class="doctor-card">
+                            <div class="doctor-icon">⏰</div>
+                            <h3>Medicine Reminders</h3>
+                            <p class="doctor-info">Set medicine reminders and prepare a family alert when a dose is missed.</p>
+                            <button class="btn btn-primary" onclick="showSectionByName('reminders')">
+                                Manage Reminders
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= DOCTORS ================= -->
+
+            <section id="doctors" class="section">
+
+                <div class="card">
+                    <h2>Find a Doctor</h2>
+
+                    <input
+                        class="search-bar"
+                        id="doctorSearch"
+                        placeholder="Search doctor or speciality..."
+                        oninput="renderDoctors()">
+
+                    <div class="grid" id="doctorGrid"></div>
+                </div>
+
+            </section>
+
+
+            <!-- ================= APPOINTMENTS ================= -->
+
+            <section id="appointments" class="section">
+
+                <div class="card">
+
+                    <h2>Book Appointment</h2>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label>Doctor</label>
+
+                            <select id="appointmentDoctor"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Date</label>
+
+                            <input
+                                type="date"
+                                id="appointmentDate">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Time</label>
+
+                            <select id="appointmentTime">
+                                <option>09:00 AM</option>
+                                <option>10:00 AM</option>
+                                <option>11:00 AM</option>
+                                <option>12:00 PM</option>
+                                <option>01:00 PM</option>
+                                <option>02:00 PM</option>
+                                <option>03:00 PM</option>
+                                <option>04:00 PM</option>
+                                <option>05:00 PM</option>
+                                <option>06:00 PM</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Reason</label>
+
+                            <input
+                                id="appointmentReason"
+                                placeholder="Reason for appointment">
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="bookAppointment()">
+                        Book Appointment
+                    </button>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h2>My Appointments</h2>
+
+                    <div class="table-wrap">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Doctor</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Fee</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="appointmentTable"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= PHARMACY ================= -->
+
+            <section id="pharmacy" class="section">
+
+                <div class="card">
+
+                    <h2>Medical Pharmacy</h2>
+
+                    <input
+                        class="search-bar"
+                        id="medicineSearch"
+                        placeholder="Search medicine..."
+                        oninput="renderPharmacy()">
+
+                    <div class="grid" id="pharmacyGrid"></div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================= MEDICINE REMINDERS ================= -->
+            <section id="reminders" class="section">
+
+                <div class="healthmate-banner">
+                    <h2>💊 Medicine Reminder & Family Health Tracker</h2>
+                    <p>Never miss an important dose. Add medicines, set reminder times and keep a family contact ready for missed-dose alerts.</p>
+                </div>
+
+                <div class="card">
+                    <h2>⏰ Add Medicine Reminder</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Medicine Name</label>
+                            <input id="reminderMedicine" placeholder="e.g. Paracetamol 500mg">
+                        </div>
+                        <div class="form-group">
+                            <label>Dosage</label>
+                            <input id="reminderDosage" placeholder="e.g. 1 tablet">
+                        </div>
+                        <div class="form-group">
+                            <label>Reminder Time</label>
+                            <input id="reminderTime" type="time">
+                        </div>
+                        <div class="form-group">
+                            <label>Start Date</label>
+                            <input id="reminderDate" type="date">
+                        </div>
+                        <div class="form-group">
+                            <label>Frequency</label>
+                            <select id="reminderFrequency">
+                                <option value="Daily">Daily</option>
+                                <option value="Twice daily">Twice daily</option>
+                                <option value="Weekly">Weekly</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Family Member / Caregiver</label>
+                            <input id="familyName" placeholder="e.g. Mother">
+                        </div>
+                        <div class="form-group">
+                            <label>Family Mobile Number</label>
+                            <input id="familyPhone" type="tel" maxlength="10" placeholder="10-digit mobile number">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="addMedicineReminder()">➕ Add Reminder</button>
+<button class="btn btn-secondary" onclick="enableMedicineNotifications()">🔔 Enable Browser Notifications</button>
+<p class="muted" style="margin-top:8px;">Browser reminders work while this website is open. Notifications require browser permission.</p>
+                </div>
+
+                <div class="card">
+                    <h2>My Medicine Reminders</h2>
+                    <div id="reminderList" class="reminder-grid"></div>
+                </div>
+                <div class="card">
+                    <h2>📋 Dose History</h2>
+                    <p class="muted">Recent doses marked as taken on this browser.</p>
+                    <div id="reminderHistory"></div>
+                </div>
+            </section>
+
+
+            <!-- ================= CART ================= -->
+
+            <section id="cart" class="section">
+
+                <div class="card">
+
+                    <h2>🛒 My Cart</h2>
+
+                    <div id="cartItems"></div>
+
+                    <div class="delivery-box">
+                        <h3>🚚 Medicine Delivery</h3>
+                        <p style="color:#71858a;margin:6px 0 12px;">Delivery costs ₹25 base + ₹3.50 per km. Orders above ₹999 get free delivery.</p>
+                        <div class="delivery-grid">
+                            <div class="form-group">
+                                <label>Delivery Distance (km)</label>
+                                <input id="deliveryDistance" type="number" min="0" step="0.1" value="2" oninput="updateCartTotals()" placeholder="e.g. 4.5">
+                            </div>
+                            <div class="form-group">
+                                <label>Delivery Rule</label>
+                                <input value="₹25 base + ₹3.50/km; free above ₹999" readonly>
+                            </div>
+                        </div>
+                        <div class="delivery-summary">
+                            <div><span>Medicine subtotal</span><strong id="cartSubtotal">₹0.00</strong></div>
+                            <div><span>Delivery fee</span><strong id="deliveryFee">₹0.00</strong></div>
+                            <div><span>Offer</span><strong id="deliveryOffer">—</strong></div>
+                            <div style="font-size:18px;border-top:1px solid #e4eeee;padding-top:10px;"><span>Payable total</span><strong id="cartPayableTotal">₹0.00</strong></div>
+                        </div>
+                    </div>
+
+                    <div class="total-box">
+                        <p>Total Amount</p>
+                        <strong id="cartTotal">₹0.00</strong>
+                        <br><br>
+                        <button class="btn btn-primary" style="width:220px;" onclick="checkout()">
+                            Proceed to Checkout
+                        </button>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+
+    <!-- ================= PAYMENT MODAL ================= -->
+    <div id="paymentModal" class="payment-modal" onclick="paymentBackdropClose(event)">
+        <div class="payment-box">
+            <div class="payment-head">
+                <div>
+                    <h2>💳 Secure Medinest Payment</h2>
+                    <p style="color:#71858a;margin-top:4px;">Choose UPI, card, net banking or wallet payment.</p>
+                </div>
+                <button class="payment-close" onclick="closePaymentModal()" aria-label="Close">×</button>
+            </div>
+
+            <div class="payment-amount">
+                <small>Cart amount to pay</small>
+                <strong id="paymentTotal">₹0.00</strong>
+            </div>
+
+            <div class="upi-layout">
+                <div class="qr-card">
+                    <h3>📱 UPI QR</h3>
+                    <div id="upiQr"></div>
+                    <div class="upi-id">Admin UPI ID: <strong id="merchantUpiText">medinest@upi</strong></div>
+                    <div class="payment-note">This QR contains the exact cart value. The payment is directed to the UPI ID configured for the Medinest administrator.</div>
+                </div>
+
+                <div>
+                    <h3>UPI Apps</h3>
+                    <div class="upi-apps">
+                        <button class="upi-app" onclick="openUpiApp('Google Pay')"><span class="upi-logo">GPay</span>Google Pay</button>
+                        <button class="upi-app" onclick="openUpiApp('PhonePe')"><span class="upi-logo">Pe</span>PhonePe</button>
+                        <button class="upi-app" onclick="openUpiApp('Paytm')"><span class="upi-logo">Paytm</span>Paytm</button>
+                        <button class="upi-app" onclick="openUpiApp('BHIM')"><span class="upi-logo">BHIM</span>BHIM</button>
+                        <button class="upi-app" onclick="openUpiApp('Amazon Pay')"><span class="upi-logo">Amazon</span>Amazon Pay</button>
+                        <button class="upi-app" onclick="openUpiApp('WhatsApp Pay')"><span class="upi-logo">WA</span>WhatsApp Pay</button>
+                        <button class="upi-app" onclick="openUpiApp('CRED')"><span class="upi-logo">CRED</span>CRED UPI</button>
+                        <button class="upi-app" onclick="openUpiApp('Other UPI')"><span class="upi-logo">UPI</span>Other UPI App</button>
+                    </div>
+                    <div class="payment-actions">
+                        <button class="btn btn-primary" onclick="openUpiApp('UPI')">Pay with UPI</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin:12px 0;">
+                <label for="paymentChoice">Payment option</label>
+                <select id="paymentChoice" onchange="updatePaymentChoice()">
+                    <option value="online">Online payment (demo QR)</option>
+                    <option value="cod">Cash on Delivery (+₹10)</option>
+                </select>
+            </div>
+            <div id="demoQrNotice" class="gateway-note">Demo QR only — no real payment is collected.</div>
+            <div class="payment-methods">
+                <h3>All Payment Methods</h3>
+                <div class="payment-method-grid">
+                    <button class="payment-method" onclick="openRazorpay()"><strong>💳 Credit / Debit Card</strong><span>Visa, Mastercard, RuPay and supported cards</span></button>
+                    <button class="payment-method" onclick="openRazorpay()"><strong>🏦 Net Banking</strong><span>Supported Indian banks</span></button>
+                    <button class="payment-method" onclick="openRazorpay()"><strong>👛 Wallets</strong><span>Wallets supported by the payment gateway</span></button>
+                    <button class="payment-method" onclick="openRazorpay()"><strong>📱 UPI Gateway</strong><span>UPI apps through secure checkout</span></button>
+                </div>
+                <div class="gateway-note"><b>Administrator settlement:</b> UPI QR payments go to the configured admin UPI ID. Card, net-banking and wallet payments require a payment-gateway merchant account owned by the administrator. The frontend must never contain a gateway secret key.</div>
+                <div class="payment-actions">
+                    <button class="btn btn-primary" onclick="openRazorpay()">🔐 Pay Securely — All Methods</button>
+                    <button class="btn btn-secondary" onclick="confirmPrototypePayment()">Prototype: I Have Completed Payment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+            <!-- ================= PRESCRIPTIONS ================= -->
+
+
+
+            <section id="prescriptions" class="section">
+
+                <div class="card">
+
+                    <h2>My Prescriptions</h2>
+
+                    <div class="table-wrap">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Medicine</th>
+                                    <th>Dosage</th>
+                                    <th>Duration</th>
+                                    <th>Doctor</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>Paracetamol 500mg</td>
+                                    <td>1 tablet</td>
+                                    <td>3 days</td>
+                                    <td>Dr. Ananya Rao</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Vitamin D3</td>
+                                    <td>1 tablet</td>
+                                    <td>30 days</td>
+                                    <td>Dr. Priya Sharma</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Omeprazole 20mg</td>
+                                    <td>1 capsule</td>
+                                    <td>7 days</td>
+                                    <td>Dr. Ananya Rao</td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= RECORDS ================= -->
+
+            <section id="records" class="section">
+
+                <div class="card">
+
+                    <h2>Health Records</h2>
+
+                    <div class="table-wrap">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Record</th>
+                                    <th>Date</th>
+                                    <th>Hospital</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>General Health Checkup</td>
+                                    <td>10 Sep 2026</td>
+                                    <td>Medinest Care Hospital</td>
+                                    <td><span class="badge">Completed</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Blood Test</td>
+                                    <td>05 Sep 2026</td>
+                                    <td>MedPlus Diagnostics</td>
+                                    <td><span class="badge">Available</span></td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= EMERGENCY ================= -->
+
+            <section id="emergency" class="section">
+
+                <div class="emergency">
+
+                    <h2>🚨 Emergency Assistance</h2>
+
+                    <p style="margin:15px 0;">
+                        If you are facing a medical emergency,
+                        contact emergency services immediately.
+                    </p>
+
+                    <button
+                        class="btn btn-danger"
+                        onclick="callEmergency()">
+                        📞 Call 112
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= PROFILE ================= -->
+
+            <section id="profile" class="section">
+
+                <div class="card">
+
+                    <h2>My Profile</h2>
+
+                    <div class="profile-avatar" id="profileAvatar">
+                        U
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label>Full Name</label>
+
+                            <input
+                                id="profileName"
+                                readonly
+                                placeholder="Enter your name">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mobile Number</label>
+
+                            <input
+                                id="profilePhone"
+                                readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email</label>
+
+                            <input
+                                id="profileEmail"
+                                readonly
+                                type="email"
+                                placeholder="Enter email">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Age</label>
+
+                            <input
+                                id="profileAge"
+                                readonly
+                                type="number"
+                                placeholder="Age">
+                        </div>
+
+                    </div>
+
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:18px;">
+
+                        <button
+                            class="btn btn-secondary"
+                            style="width:160px;"
+                            id="editProfileBtn"
+                            onclick="editProfile()">
+                            ✏️ Edit Profile
+                        </button>
+
+                        <button
+                            class="btn btn-primary"
+                            style="width:200px;display:none;"
+                            id="saveProfileBtn"
+                            onclick="saveProfile()">
+                            Save Profile
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= ADMIN ================= -->
+
+            <section id="admin" class="section">
+
+                <div class="welcome">
+                    <h1>⚙️ Admin Manage System</h1>
+                    <p>
+                        Add doctors, update appointment fees,
+                        and manage pharmacy medicines.
+                    </p>
+                </div>
+
+
+                <div class="card">
+
+                    <h2>Add Doctor</h2>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label>Doctor Name</label>
+                            <input id="newDoctorName" placeholder="Dr. Name">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Speciality</label>
+                            <input id="newDoctorSpeciality" placeholder="Speciality">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Experience</label>
+                            <input id="newDoctorExperience" placeholder="10 years">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Hospital / Clinic</label>
+                            <input id="newDoctorHospital" placeholder="Hospital">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Timing</label>
+                            <input id="newDoctorTiming" placeholder="9 AM - 5 PM">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Rating</label>
+                            <input id="newDoctorRating" placeholder="4.8">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Appointment Fee</label>
+                            <input id="newDoctorFee" type="number" placeholder="500">
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="btn btn-primary"
+                        style="width:200px;"
+                        onclick="addDoctor()">
+                        Add Doctor
+                    </button>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h2>Manage Doctors</h2>
+
+                    <div id="adminDoctors"></div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h2>Add Pharmacy Medicine</h2>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label>Medicine Name</label>
+                            <input id="newMedicineName">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Category</label>
+                            <input id="newMedicineCategory">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input id="newMedicinePrice" type="number">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Pharmacy</label>
+                            <input id="newMedicinePharmacy">
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="btn btn-primary"
+                        style="width:200px;"
+                        onclick="addMedicine()">
+                        Add Medicine
+                    </button>
+
+                </div>
+
+
+                <div class="card">
+                    <h2>🏦 Administrator Payment & Settlement Account</h2>
+                    <p style="color:#71858a;margin:6px 0 15px;">Configure the account that Medinest uses for payment collection. For real card/net-banking/wallet payments, the Razorpay merchant account must itself be linked to this bank account.</p>
+                    <div class="bank-grid">
+                        <div class="form-group"><label>Account Holder Name</label><input id="adminAccountHolder" placeholder="Medinest / Administrator"></div>
+                        <div class="form-group"><label>Bank Name</label><input id="adminBankName" placeholder="e.g. SBI / HDFC / ICICI"></div>
+                        <div class="form-group"><label>Account Number</label><input id="adminAccountNumber" type="password" placeholder="Enter bank account number"></div>
+                        <div class="form-group"><label>IFSC Code</label><input id="adminIfsc" placeholder="e.g. SBIN0000001"></div>
+                        <div class="form-group"><label>Administrator UPI ID</label><input id="adminUpiId" placeholder="yourname@upi"></div>
+                        <div class="form-group"><label>Razorpay Key ID</label><input id="adminRazorpayKey" placeholder="rzp_live_... or rzp_test_..."></div>
+                    </div>
+                    <div class="admin-bank-actions">
+                        <button class="btn btn-primary" style="width:220px;" onclick="saveAdminPaymentSettings()">💾 Save Payment Details</button>
+                        <button class="btn btn-secondary" style="width:180px;" onclick="loadAdminPaymentSettings()">↻ Reload Details</button>
+                    </div>
+                    <div class="bank-note"><b>Security:</b> these fields are stored locally in this prototype browser. Do not use a real bank password, PIN, CVV, OTP or Razorpay secret key here. Only the public Razorpay Key ID belongs in the frontend. Live settlement is controlled by the payment gateway/merchant account.</div>
+                    <div class="admin-payment-box">
+                        <b>Configured UPI:</b> <code id="adminUpiDisplay">Not configured</code><br>
+                        <b>Bank:</b> <span id="adminBankDisplay">Not configured</span><br>
+                        <b>Account:</b> <span id="adminAccountDisplay">Not configured</span>
+                    </div>
+                </div>
+
+                <div class="card">
+
+                    <h2>Manage Medicines</h2>
+
+                    <div id="adminMedicines"></div>
+
+                </div>
+                <div class="card"><h2>📦 Orders</h2><div id="adminOrders"><div class="empty">Orders appear after demo checkout.</div></div></div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<div id="toast"></div>
+
+
+<!-- ================= FIREBASE + APPLICATION JAVASCRIPT ================= -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+
+/* ================= FIREBASE CONFIG ================= */
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAkBdBzBIINkyqGHQCi2XrPzECu_TSrq68",
+    authDomain: "medinest-d6bd0.firebaseapp.com",
+    projectId: "medinest-d6bd0",
+    storageBucket: "medinest-d6bd0.firebasestorage.app",
+    messagingSenderId: "642117916359",
+    appId: "1:642117916359:web:37a7185b0acde5ecf0d0e2"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+
+/* ================= GLOBAL VARIABLES ================= */
+
+window.currentUser = null;
+window.currentRole = null;
+
+let confirmationResult = null;
+let recaptchaVerifier = null;
+
+
+/* ================= DOCTORS ================= */
+
+let doctors = JSON.parse(localStorage.getItem("medinest_doctors")) || [
+
+    {
+        id:1,
+        name:"Dr. Ananya Rao",
+        speciality:"General Physician",
+        experience:"12 years",
+        hospital:"Medinest Care Hospital",
+        timing:"9 AM - 4 PM",
+        rating:"4.8",
+        fee:400
+    },
+
+    {
+        id:2,
+        name:"Dr. Arjun Kumar",
+        speciality:"Cardiologist",
+        experience:"15 years",
+        hospital:"Apollo Medical Centre",
+        timing:"10 AM - 5 PM",
+        rating:"4.9",
+        fee:800
+    },
+
+    {
+        id:3,
+        name:"Dr. Priya Sharma",
+        speciality:"Dermatologist",
+        experience:"9 years",
+        hospital:"Skin & Care Clinic",
+        timing:"11 AM - 6 PM",
+        rating:"4.7",
+        fee:600
+    },
+
+    {
+        id:4,
+        name:"Dr. Rahul Verma",
+        speciality:"Orthopedic",
+        experience:"13 years",
+        hospital:"City Orthopedic Hospital",
+        timing:"9 AM - 2 PM",
+        rating:"4.8",
+        fee:700
+    },
+
+    {
+        id:5,
+        name:"Dr. Sneha Reddy",
+        speciality:"Pediatrician",
+        experience:"11 years",
+        hospital:"Children's Care Centre",
+        timing:"10 AM - 5 PM",
+        rating:"4.9",
+        fee:500
+    },
+
+    {
+        id:6,
+        name:"Dr. Vikram Singh",
+        speciality:"Neurologist",
+        experience:"18 years",
+        hospital:"Advanced Neuro Centre",
+        timing:"2 PM - 7 PM",
+        rating:"4.8",
+        fee:1000
+    },
+
+    {
+        id:7,
+        name:"Dr. Meera Kapoor",
+        speciality:"Gynecologist",
+        experience:"14 years",
+        hospital:"Women Care Hospital",
+        timing:"9 AM - 3 PM",
+        rating:"4.7",
+        fee:750
+    },
+
+    {
+        id:8,
+        name:"Dr. Kiran Rao",
+        speciality:"ENT Specialist",
+        experience:"10 years",
+        hospital:"ENT Care Clinic",
+        timing:"3 PM - 7 PM",
+        rating:"4.6",
+        fee:550
+    }
+
+];
+(function expandDoctorsBySpeciality(){
+ const groups=[["General Physician","General Medicine Clinic",350],["Cardiologist","Heart Care Centre",700],["Dermatologist","Skin Wellness Clinic",550],["Orthopedic","Joint & Bone Hospital",650],["Pediatrician","Child Health Centre",450],["Neurologist","Neuro Care Clinic",850],["Gynecologist","Women Health Centre",650],["ENT Specialist","ENT Care Hospital",500]];
+ let id=Math.max(...doctors.map(d=>Number(d.id)||0))+1;
+ groups.forEach((g,gi)=>{let existing=doctors.filter(d=>d.speciality===g[0]).length;for(let n=existing;n<10;n++){const names=["Aarav Mehta","Ishita Nair","Aditya Reddy","Kavya Iyer","Rahul Menon","Neha Gupta","Sanjay Rao","Priya Das","Vivek Sharma"];doctors.push({id:id++,name:"Dr. "+names[(n+gi)%names.length]+" "+(n+1),speciality:g[0],experience:(5+n)+" years",hospital:g[1],timing:"10 AM - 5 PM",rating:(4.5+((n+gi)%5)*0.1).toFixed(1),fee:g[2]+n*25});}});
+})();
+
+/* ================= MEDICINES ================= */
+
+let defaultMedicines = [
+    {id:1,name:"Paracetamol 500mg",category:"Pain Relief / General",price:35,pharmacy:"Apollo Pharmacy",prescriptionRequired:false},
+    {id:2,name:"Vitamin D3 1000 IU",category:"Bones / Vitamins",price:120,pharmacy:"MedPlus Pharmacy",prescriptionRequired:false},
+    {id:3,name:"Omeprazole 20mg",category:"Stomach / Acidity",price:85,pharmacy:"HealthCare Medicals",prescriptionRequired:false},
+    {id:4,name:"Cetirizine 10mg",category:"Allergy / ENT",price:45,pharmacy:"Sri Sai Medicals",prescriptionRequired:false},
+    {id:5,name:"ORS Sachets",category:"Hydration / General",price:30,pharmacy:"Apollo Pharmacy",prescriptionRequired:false},
+    {id:6,name:"Multivitamin Tablets",category:"Vitamins / General",price:180,pharmacy:"MedPlus Pharmacy",prescriptionRequired:false},
+    {id:7,name:"Antiseptic Cream",category:"Skin / First Aid",price:95,pharmacy:"HealthCare Medicals",prescriptionRequired:false},
+    {id:8,name:"Cough Syrup",category:"Lungs / Respiratory",price:110,pharmacy:"Sri Sai Medicals",prescriptionRequired:false},
+    {id:9,name:"Amoxicillin 500mg",category:"Antibiotic / General",price:95,pharmacy:"Apollo Pharmacy",prescriptionRequired:true},
+    {id:10,name:"Azithromycin 500mg",category:"Antibiotic / Respiratory",price:85,pharmacy:"MedPlus Pharmacy",prescriptionRequired:true},
+    {id:11,name:"Ibuprofen 400mg",category:"Pain / Joints",price:60,pharmacy:"HealthCare Medicals",prescriptionRequired:false},
+    {id:12,name:"Diclofenac Gel",category:"Joints / Muscles",price:90,pharmacy:"Sri Sai Medicals",prescriptionRequired:false},
+    {id:13,name:"Pantoprazole 40mg",category:"Stomach / Gastric",price:70,pharmacy:"Apollo Pharmacy",prescriptionRequired:true},
+    {id:14,name:"Antacid Suspension",category:"Stomach / Acidity",price:95,pharmacy:"MedPlus Pharmacy",prescriptionRequired:false},
+    {id:15,name:"Loperamide 2mg",category:"Intestine / Diarrhea",price:55,pharmacy:"HealthCare Medicals",prescriptionRequired:false},
+    {id:16,name:"ORS Apple Flavour",category:"Intestine / Hydration",price:35,pharmacy:"Sri Sai Medicals",prescriptionRequired:false},
+    {id:17,name:"Lactulose Syrup",category:"Intestine / Constipation",price:130,pharmacy:"Apollo Pharmacy",prescriptionRequired:false},
+    {id:18,name:"Domperidone 10mg",category:"Stomach / Nausea",price:65,pharmacy:"MedPlus Pharmacy",prescriptionRequired:true},
+    {id:19,name:"Dicyclomine 10mg",category:"Stomach / Intestine",price:55,pharmacy:"HealthCare Medicals",prescriptionRequired:true},
+    {id:20,name:"Probiotic Capsules",category:"Gut / Digestive",price:210,pharmacy:"Sri Sai Medicals",prescriptionRequired:false},
+    {id:21,name:"Silymarin Tablets",category:"Liver Support",price:180,pharmacy:"Apollo Pharmacy",prescriptionRequired:false},
+    {id:22,name:"Ursodeoxycholic Acid 300mg",category:"Liver / Biliary",price:240,pharmacy:"MedPlus Pharmacy",prescriptionRequired:true},
+    {id:23,name:"Sodium Bicarbonate Tablets",category:"Kidney / Urinary",price:75,pharmacy:"HealthCare Medicals",prescriptionRequired:true},
+    {id:24,name:"Potassium Citrate Syrup",category:"Kidney / Urinary",price:160,pharmacy:"Sri Sai Medicals",prescriptionRequired:true},
+    {id:25,name:"Cranberry Extract Capsules",category:"Urinary Tract",price:220,pharmacy:"Apollo Pharmacy",prescriptionRequired:false},
+    {id:26,name:"Urinary Alkaliser Sachets",category:"Kidney / Urinary",price:95,pharmacy:"MedPlus Pharmacy",prescriptionRequired:false},
+    {id:27,name:"Amlodipine 5mg",category:"Heart / Blood Pressure",price:55,pharmacy:"HealthCare Medicals",prescriptionRequired:true},
+    {id:28,name:"Telmisartan 40mg",category:"Heart / Blood Pressure",price:90,pharmacy:"Sri Sai Medicals",prescriptionRequired:true},
+    {id:29,name:"Atorvastatin 10mg",category:"Heart / Cholesterol",price:80,pharmacy:"Apollo Pharmacy",prescriptionRequired:true},
+    {id:30,name:"Aspirin 75mg",category:"Heart / Blood Thinner",price:45,pharmacy:"MedPlus Pharmacy",prescriptionRequired:true},
+    {id:31,name:"Metoprolol 25mg",category:"Heart / Blood Pressure",price:65,pharmacy:"HealthCare Medicals",prescriptionRequired:true},
+    {id:32,name:"Nitroglycerin Tablets",category:"Heart / Angina",price:150,pharmacy:"Sri Sai Medicals",prescriptionRequired:true},
+    {id:33,name:"Rosuvastatin 10mg",category:"Heart / Cholesterol",price:95,pharmacy:"Apollo Pharmacy",prescriptionRequired:true},
+    {id:34,name:"Clopidogrel 75mg",category:"Heart / Blood Thinner",price:120,pharmacy:"MedPlus Pharmacy",prescriptionRequired:true},
+    {id:35,name:"Metformin 500mg",category:"Diabetes / Endocrine",price:55,pharmacy:"HealthCare Medicals",prescriptionRequired:true},
+    {id:36,name:"Glimepiride 1mg",category:"Diabetes / Endocrine",price:65,pharmacy:"Sri Sai Medicals",prescriptionRequired:true},
+    {id:37,name:"Glucose Test Strips",category:"Diabetes / Monitoring",price:450,pharmacy:"Apollo Pharmacy",prescriptionRequired:false},
+    {id:38,name:"Insulin Syringes",category:"Diabetes / Monitoring",price:180,pharmacy:"MedPlus Pharmacy",prescriptionRequired:false},
+    {id:39,name:"Thyroxine 50mcg",category:"Thyroid / Endocrine",price:80,pharmacy:"HealthCare Medicals",prescriptionRequired:true},
+    {id:40,name:"Calcium + Vitamin D Tablets",category:"Bones / Calcium",price:160,pharmacy:"Sri Sai Medicals",prescriptionRequired:false},
+    {id:41,name:"Calcium Citrate Tablets",category:"Bones / Calcium",price:220,pharmacy:"Apollo Pharmacy",prescriptionRequired:false},
+    {id:42,name:"Magnesium Tablets",category:"Muscles / Minerals",price:190,pharmacy:"MedPlus Pharmacy",prescriptionRequired:false},
+    {id:43,name:"Methylcobalamin B12",category:"Nerves / Vitamins",price:210,pharmacy:"HealthCare Medicals",prescriptionRequired:false},
+    {id:44,name:"Pregabalin 75mg",category:"Nerves / Neurology",price:145,pharmacy:"Sri Sai Medicals",prescriptionRequired:true},
+    {id:45,name:"Levetiracetam 500mg",category:"Brain / Neurology",price:180,pharmacy:"Apollo Pharmacy",prescriptionRequired:true},
+    {id:46,name:"Gabapentin 300mg",category:"Nerves / Neurology",price:130,pharmacy:"MedPlus Pharmacy",prescriptionRequired:true},
+    {id:47,name:"Vitamin B Complex",category:"Brain / Nerves / Vitamins",price:120,pharmacy:"HealthCare Medicals",prescriptionRequired:false},
+    {id:48,name:"Salbutamol Inhaler",category:"Lungs / Asthma",price:160,pharmacy:"Sri Sai Medicals",prescriptionRequired:true},
+    {id:49,name:"Budesonide Inhaler",category:"Lungs / Asthma",price:280,pharmacy:"Apollo Pharmacy",prescriptionRequired:true},
+    {id:50,name:"Montelukast 10mg",category:"Lungs / Allergy",price:110,pharmacy:"MedPlus Pharmacy",prescriptionRequired:true},
+    {id:51,name:"Ambroxol Syrup",category:"Lungs / Cough",price:125,pharmacy:"HealthCare Medicals",prescriptionRequired:false},
+    {id:52,name:"Steam Inhaler",category:"Nose / Respiratory",price:450,pharmacy:"Sri Sai Medicals",prescriptionRequired:false},
+    {id:53,name:"Oxymetazoline Nasal Spray",category:"Nose / ENT",price:95,pharmacy:"Apollo Pharmacy",prescriptionRequired:false},
+    {id:54,name:"Saline Nasal Drops",category:"Nose / ENT",price:60,pharmacy:"MedPlus Pharmacy",prescriptionRequired:false},
+    {id:55,name:"Artificial Tears",category:"Eyes / Ophthalmic",price:145,pharmacy:"HealthCare Medicals",prescriptionRequired:false},
+    {id:56,name:"Lubricating Eye Gel",category:"Eyes / Ophthalmic",price:190,pharmacy:"Sri Sai Medicals",prescriptionRequired:false},
+    {id:57,name:"Eye Vitamin Capsules",category:"Eyes / Vitamins",price:260,pharmacy:"Apollo Pharmacy",prescriptionRequired:false},
+    {id:58,name:"Ear Drops Wax Softener",category:"Ears / ENT",price:120,pharmacy:"MedPlus Pharmacy",prescriptionRequired:false},
+    {id:59,name:"Antifungal Cream Clotrimazole",category:"Skin / Fungal",price:85,pharmacy:"HealthCare Medicals",prescriptionRequired:false},
+    {id:60,name:"Hydrocortisone 1% Cream",category:"Skin / Inflammation",price:70,pharmacy:"Sri Sai Medicals",prescriptionRequired:false},
+    {id:61,name:"Calamine Lotion",category:"Skin / Itching",price:95,pharmacy:"Apollo Pharmacy",prescriptionRequired:false},
+    {id:62,name:"Benzoyl Peroxide Gel",category:"Skin / Acne",price:140,pharmacy:"MedPlus Pharmacy",prescriptionRequired:false},
+    {id:63,name:"Moisturizing Cream",category:"Skin / Dryness",price:180,pharmacy:"HealthCare Medicals",prescriptionRequired:false},
+    {id:64,name:"Sunscreen SPF 50",category:"Skin / Sun Protection",price:350,pharmacy:"Sri Sai Medicals",prescriptionRequired:false},
+    {id:65,name:"Mupirocin Ointment",category:"Skin / Bacterial",price:150,pharmacy:"Apollo Pharmacy",prescriptionRequired:true},
+    {id:66,name:"Ferrous Ascorbate Tablets",category:"Blood / Iron",price:140,pharmacy:"MedPlus Pharmacy",prescriptionRequired:false},
+    {id:67,name:"Folic Acid 5mg",category:"Blood / Vitamins",price:55,pharmacy:"HealthCare Medicals",prescriptionRequired:false},
+    {id:68,name:"Vitamin B12 Tablets",category:"Blood / Nerves",price:100,pharmacy:"Sri Sai Medicals",prescriptionRequired:false},
+    {id:69,name:"Electrolyte Powder",category:"Blood / Hydration",price:80,pharmacy:"Apollo Pharmacy",prescriptionRequired:false},
+    {id:70,name:"Oral Rehydration Jelly",category:"General / Hydration",price:65,pharmacy:"MedPlus Pharmacy",prescriptionRequired:false},
+    {id:71,name:"Paracetamol Suspension",category:"Children / Fever",price:75,pharmacy:"HealthCare Medicals",prescriptionRequired:false},
+    {id:72,name:"Pediatric ORS",category:"Children / Hydration",price:45,pharmacy:"Sri Sai Medicals",prescriptionRequired:false},
+    {id:73,name:"Zinc Syrup",category:"Children / Nutrition",price:95,pharmacy:"Apollo Pharmacy",prescriptionRequired:false},
+    {id:74,name:"Folic Acid 400mcg",category:"Women's Health / Vitamins",price:65,pharmacy:"MedPlus Pharmacy",prescriptionRequired:false},
+    {id:75,name:"Iron + Folic Acid Tablets",category:"Women's Health / Iron",price:110,pharmacy:"HealthCare Medicals",prescriptionRequired:false},
+    {id:76,name:"Clotrimazole Vaginal Cream",category:"Women's Health",price:130,pharmacy:"Sri Sai Medicals",prescriptionRequired:false},
+    {id:77,name:"Pregnancy Multivitamin",category:"Women's Health / Vitamins",price:280,pharmacy:"Apollo Pharmacy",prescriptionRequired:false},
+    {id:78,name:"Lubricating Jelly",category:"Personal / Reproductive Health",price:160,pharmacy:"MedPlus Pharmacy",prescriptionRequired:false},
+    {id:79,name:"Povidone Iodine Solution",category:"First Aid / Skin",price:90,pharmacy:"HealthCare Medicals",prescriptionRequired:false},
+    {id:80,name:"Adhesive Bandages",category:"First Aid",price:50,pharmacy:"Sri Sai Medicals",prescriptionRequired:false},
+    {id:81,name:"Sterile Gauze Pads",category:"First Aid",price:75,pharmacy:"Apollo Pharmacy",prescriptionRequired:false},
+    {id:82,name:"Digital Thermometer",category:"Monitoring / General",price:180,pharmacy:"MedPlus Pharmacy",prescriptionRequired:false},
+    {id:83,name:"Blood Pressure Monitor",category:"Heart / Monitoring",price:1450,pharmacy:"HealthCare Medicals",prescriptionRequired:false},
+    {id:84,name:"Pulse Oximeter",category:"Lungs / Monitoring",price:850,pharmacy:"Sri Sai Medicals",prescriptionRequired:false},
+    {id:85,name:"Hot Water Bag",category:"Muscles / Pain Relief",price:280,pharmacy:"Apollo Pharmacy",prescriptionRequired:false},
+    {id:86,name:"Knee Support",category:"Bones / Joints",price:450,pharmacy:"MedPlus Pharmacy",prescriptionRequired:false},
+    {id:87,name:"Elastic Crepe Bandage",category:"Bones / First Aid",price:120,pharmacy:"HealthCare Medicals",prescriptionRequired:false},
+    {id:88,name:"Multivitamin Gummies",category:"Nutrition / Vitamins",price:320,pharmacy:"Sri Sai Medicals",prescriptionRequired:false}
+];
+
+
+// Additional demo pharmacy partners (20)
+const extraPharmacies = ['Wellness Forever', 'Guardian Pharmacy', 'Netmeds Store', 'Medlife Medicals', 'Jan Aushadhi Kendra', 'Apollo Clinic Pharmacy', 'Care n Cure Pharmacy', 'Vijaya Medicals', 'Venkateswara Medicals', 'Ravi Medical Store', 'Lakshmi Pharmacy', 'Sree Krishna Medicals', 'New Life Pharmacy', 'City Health Pharmacy', 'Trust Medicals', 'Arogya Pharmacy', 'MediWorld', 'Prime Medicals', 'Green Cross Pharmacy', 'People’s Pharmacy'];
+
+let medicines = JSON.parse(localStorage.getItem("medinest_medicines")) || defaultMedicines;
+// Merge the expanded catalog into an older localStorage catalog without removing admin-added medicines.
+(function mergeDefaultMedicines(){
+    const existingIds = new Set(medicines.map(m=>m.id));
+    defaultMedicines.forEach(m=>{ if(!existingIds.has(m.id)) medicines.push(m); });
+    medicines.forEach((m,i)=>{ if(!m.pharmacy || ["Apollo Pharmacy","MedPlus Pharmacy","HealthCare Medicals","Sri Sai Medicals"].includes(m.pharmacy)) m.pharmacy=extraPharmacies[i%extraPharmacies.length]; });
+})();
+localStorage.setItem("medinest_medicines",JSON.stringify(medicines));
+
+/* ================= STORAGE ================= */
+
+let cart = JSON.parse(localStorage.getItem("medinest_cart")) || [];
+let medinestOrders = JSON.parse(localStorage.getItem("medinest_orders")) || [];
+
+let appointments =
+    JSON.parse(localStorage.getItem("medinest_appointments")) || [];
+
+let profile =
+    JSON.parse(localStorage.getItem("medinest_profile")) || {};
+
+let reminders =
+    JSON.parse(localStorage.getItem("medinest_reminders")) || [];
+
+let adminPaymentSettings = JSON.parse(localStorage.getItem("medinest_admin_payment")) || {
+    accountHolder:"", bankName:"", accountNumber:"", ifsc:"", upiId:"", razorpayKeyId:""
+};
+
+
+/* ================= SAVE ================= */
+
+function saveData(){
+
+    localStorage.setItem(
+        "medinest_doctors",
+        JSON.stringify(doctors)
+    );
+
+    localStorage.setItem(
+        "medinest_medicines",
+        JSON.stringify(medicines)
+    );
+
+    localStorage.setItem(
+        "medinest_cart",
+        JSON.stringify(cart)
+    );
+    localStorage.setItem("medinest_orders",JSON.stringify(medinestOrders));
+
+    localStorage.setItem(
+        "medinest_appointments",
+        JSON.stringify(appointments)
+    );
+
+    localStorage.setItem(
+        "medinest_profile",
+        JSON.stringify(profile)
+    );
+
+    localStorage.setItem(
+        "medinest_reminders",
+        JSON.stringify(reminders)
+    );
+
+    localStorage.setItem(
+        "medinest_admin_payment",
+        JSON.stringify(adminPaymentSettings)
+    );
+}
+
+
+/* ================= TOAST ================= */
+
+window.toast = function(message){
+
+    const t = document.getElementById("toast");
+
+    t.textContent = message;
+    t.style.display = "block";
+
+    setTimeout(()=>{
+        t.style.display = "none";
+    },2500);
+};
+
+
+/* ================= LOGIN MESSAGE ================= */
+
+function loginMessage(message,type=""){
+
+    const el = document.getElementById("loginMessage");
+
+    el.textContent = message;
+    el.className = type;
+
+}
+
+
+/* ================= RECAPTCHA ================= */
+
+async function createRecaptcha(){
+
+    try{
+
+        if(recaptchaVerifier){
+
+            recaptchaVerifier.clear();
+            recaptchaVerifier = null;
+
+        }
+
+        recaptchaVerifier = new RecaptchaVerifier(
+            auth,
+            "recaptcha-container",
+            {
+                size:"normal"
+            }
+        );
+
+        await recaptchaVerifier.render();
+
+    }catch(error){
+
+        console.error(error);
+
+        loginMessage(
+            "reCAPTCHA could not load. Please refresh the page.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* ================= PATIENT EMAIL/PASSWORD DEMO LOGIN ================= */
+window.showPatientRegister=function(){
+    document.getElementById("patientRegister").style.display="block";
+    document.getElementById("patientEmail").closest(".input-group").style.display="none";
+    document.getElementById("patientPassword").closest(".input-group").style.display="none";
+};
+window.hidePatientRegister=function(){
+    document.getElementById("patientRegister").style.display="none";
+    document.getElementById("patientEmail").closest(".input-group").style.display="";
+    document.getElementById("patientPassword").closest(".input-group").style.display="";
+};
+window.createPatientAccount=function(){
+    const name=document.getElementById("registerName").value.trim();
+    const phone=document.getElementById("registerPhone").value.trim();
+    const email=document.getElementById("registerEmail").value.trim().toLowerCase();
+    const password=document.getElementById("registerPassword").value;
+    const confirm=document.getElementById("registerConfirmPassword").value;
+    if(!name){loginMessage("Please enter your full name.","error");return;}
+    if(!/^[0-9]{10}$/.test(phone)){loginMessage("Enter a valid 10-digit mobile number.","error");return;}
+    if(email && !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)){loginMessage("Enter a valid email or leave it blank.","error");return;}
+    if(password.length<6){loginMessage("Password must contain at least 6 characters.","error");return;}
+    if(password!==confirm){loginMessage("Passwords do not match.","error");return;}
+    const key="medinest_patient_phone_"+phone;
+    if(localStorage.getItem(key)){loginMessage("An account with this mobile number already exists. Please login.","error");return;}
+    localStorage.setItem(key,password);
+    localStorage.setItem("medinest_patient_profile_"+phone,JSON.stringify({name:name,phone:"+91"+phone,email:email}));
+    document.getElementById("patientPhone").value=phone;
+    document.getElementById("patientEmail").value=email;
+    document.getElementById("patientPassword").value=password;
+    hidePatientRegister();
+    loginMessage("Account created. Please login with your mobile number and password.","success");
+};
+window.patientLogin = function(){
+    const name = document.getElementById("patientLoginName").value.trim();
+    const phone = document.getElementById("patientPhone").value.trim();
+    const email = document.getElementById("patientEmail").value.trim().toLowerCase();
+    const password = document.getElementById("patientPassword").value;
+
+    if(!name){
+        loginMessage("Please enter your full name.","error"); return;
+    }
+    if(!/^[0-9]{10}$/.test(phone)){
+        loginMessage("Please enter a valid 10-digit mobile number.","error"); return;
+    }
+    if(email && !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)){
+        loginMessage("Please enter a valid email address or leave it blank.","error"); return;
+    }
+    if(password.length < 6){
+        loginMessage("Please enter a password with at least 6 characters.","error"); return;
+    }
+    // Demo login: phone number is the required identity. Optional credentials
+    // are stored locally only when supplied; this is not production auth.
+    const key = "medinest_patient_phone_" + phone;
+    const saved = localStorage.getItem(key);
+    if(saved && saved !== password){
+        loginMessage("Incorrect password for this demo phone account.","error"); return;
+    }
+    if(!saved) localStorage.setItem(key,password);
+    const profileKey = "medinest_patient_profile_" + phone;
+    const profile = JSON.parse(localStorage.getItem(profileKey) || "{}");
+    profile.name = name;
+    if(email) profile.email = email;
+    profile.phone = "+91" + phone;
+    localStorage.setItem(profileKey,JSON.stringify(profile));
+
+    window.currentUser = "+91" + phone;
+    window.currentRole = "user";
+    localStorage.setItem("medinest_role","user");
+    localStorage.setItem("medinest_patient_phone","+91"+phone);
+    showApplication();
+    toast("Patient login successful.");
+};
+
+/* ================= ADMIN LOGIN ================= */
+
+window.adminLogin = function(){
+
+    const username =
+        document.getElementById("adminUsername").value.trim();
+
+    const password =
+        document.getElementById("adminPassword").value;
+
+    if(
+        username === "admin" &&
+        password === "admin123"
+    ){
+
+        window.currentUser = "Administrator";
+        window.currentRole = "admin";
+
+        localStorage.setItem(
+            "medinest_admin",
+            "true"
+        );
+
+        showApplication();
+
+        toast("Administrator login successful.");
+
+    }else{
+
+        loginMessage(
+            "Invalid administrator username or password.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* ================= SHOW LOGIN TYPES ================= */
+
+window.showAdminLogin = function(){
+
+    document.getElementById("userLogin").style.display = "none";
+
+    document.getElementById("adminLogin").style.display = "block";
+
+    loginMessage("");
+
+};
+
+
+window.showUserLogin = function(){
+
+    document.getElementById("adminLogin").style.display = "none";
+
+    document.getElementById("userLogin").style.display = "block";
+
+    loginMessage("");
+
+};
+
+
+/* ================= SHOW APPLICATION ================= */
+
+function showApplication(){
+
+    document.getElementById("loginScreen").style.display = "none";
+
+    document.getElementById("app").style.display = "block";
+
+    updateHeader();
+
+    renderDoctors();
+
+    renderDoctorSelect();
+
+    renderPharmacy();
+
+    renderAppointments();
+
+    renderCart();
+
+    renderReminders();
+
+    renderAdmin();
+    renderAdminPaymentSettings();
+
+    loadProfile();
+
+    updateDashboard();
+
+}
+
+
+/* ================= HEADER ================= */
+
+function updateHeader(){
+
+    const name =
+        window.currentRole === "admin"
+        ? "Administrator"
+        : (window.currentUser || "Patient");
+
+    document.getElementById("headerUser").textContent = name;
+
+    const initial =
+        name.charAt(0).toUpperCase();
+
+    document.getElementById("headerAvatar").textContent =
+        initial;
+
+    document.getElementById("profileAvatar").textContent =
+        initial;
+
+    document.getElementById("welcomeText").textContent =
+        "Welcome to Medinest, " + name + " 👋";
+
+}
+
+
+/* ================= NAVIGATION ================= */
+
+window.showSection = function(id,button){
+
+    document.querySelectorAll(".section").forEach(section=>{
+        section.classList.remove("active");
+    });
+
+    const target =
+        document.getElementById(id);
+
+    if(target){
+        target.classList.add("active");
+    }
+
+    document.querySelectorAll(".menu button").forEach(btn=>{
+        btn.classList.remove("active");
+    });
+
+    if(button){
+        button.classList.add("active");
+    }
+
+    const titles = {
+
+        dashboard:"Dashboard",
+        doctors:"Doctors",
+        appointments:"Appointments",
+        pharmacy:"Pharmacy",
+        reminders:"Medicine Reminders",
+        cart:"Shopping Cart",
+        prescriptions:"Prescriptions",
+        records:"Health Records",
+        emergency:"Emergency",
+        profile:"Profile",
+        admin:"Manage System"
+
+    };
+
+    document.getElementById("pageTitle").textContent =
+        titles[id] || "Medinest";
+
+    document.getElementById("sidebar")
+        .classList.remove("open");
+
+};
+
+
+window.showSectionByName = function(id){
+
+    const button =
+        [...document.querySelectorAll(".menu button")]
+        .find(btn =>
+            btn.getAttribute("onclick") &&
+            btn.getAttribute("onclick").includes("'" + id + "'")
+        );
+
+    showSection(id,button);
+
+};
+
+
+window.toggleSidebar = function(){
+
+    document.getElementById("sidebar")
+        .classList.toggle("open");
+
+};
+
+
+/* ================= DOCTORS ================= */
+
+window.renderDoctors = function(){
+
+    const grid =
+        document.getElementById("doctorGrid");
+
+    if(!grid) return;
+
+    const search =
+        (document.getElementById("doctorSearch")?.value || "")
+        .toLowerCase();
+
+    const filtered =
+        doctors.filter(d =>
+            d.name.toLowerCase().includes(search) ||
+            d.speciality.toLowerCase().includes(search) ||
+            d.hospital.toLowerCase().includes(search)
+        );
+
+    if(filtered.length === 0){
+
+        grid.innerHTML =
+            '<div class="empty">No doctors found.</div>';
+
+        return;
+    }
+
+    grid.innerHTML =
+        filtered.map(d => `
+
+        <div class="doctor-card">
+
+            <div class="doctor-icon">👨‍⚕️</div>
+
+            <h3>${d.name}</h3>
+
+            <div class="speciality">
+                ${d.speciality}
+            </div>
+
+            <div class="doctor-info">
+                <b>Experience:</b> ${d.experience}<br>
+                <b>Hospital:</b> ${d.hospital}<br>
+                <b>Available:</b> ${d.timing}
+            </div>
+
+            <div class="rating">
+                ★ ${d.rating}
+            </div>
+
+            <div class="price">
+                ₹${d.fee}
+            </div>
+
+            <div class="card-actions">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="bookDoctor(${d.id})">
+                    Book
+                </button>
+
+            </div>
+
+        </div>
+
+        `).join("");
+
+    document.getElementById("doctorCount").textContent =
+        doctors.length;
+
+};
+
+
+/* ================= DOCTOR SELECT ================= */
+
+function renderDoctorSelect(){
+
+    const select =
+        document.getElementById("appointmentDoctor");
+
+    select.innerHTML =
+        doctors.map(d => `
+            <option value="${d.id}">
+                ${d.name} - ₹${d.fee}
+            </option>
+        `).join("");
+
+}
+
+
+/* ================= BOOK DOCTOR ================= */
+
+window.bookDoctor = function(id){
+
+    showSectionByName("appointments");
+
+    document.getElementById("appointmentDoctor").value =
+        id;
+
+    toast("Doctor selected. Choose date and time.");
+
+};
+
+
+/* ================= APPOINTMENT ================= */
+
+window.bookAppointment = function(){
+
+    if(window.currentRole === "admin"){
+
+        toast("Administrator cannot book patient appointments.");
+        return;
+
+    }
+
+    const doctorId =
+        Number(
+            document.getElementById("appointmentDoctor").value
+        );
+
+    const date =
+        document.getElementById("appointmentDate").value;
+
+    const time =
+        document.getElementById("appointmentTime").value;
+
+    const reason =
+        document.getElementById("appointmentReason").value.trim();
+
+    if(!date){
+
+        toast("Please select an appointment date.");
+        return;
+
+    }
+
+    const doctor =
+        doctors.find(d=>d.id === doctorId);
+
+    if(!doctor) return;
+
+    appointments.push({
+
+        id:Date.now(),
+
+        user:window.currentUser,
+
+        doctor:doctor.name,
+
+        doctorId:doctor.id,
+
+        date:date,
+
+        time:time,
+
+        reason:reason,
+
+        fee:doctor.fee,
+
+        status:"Confirmed"
+
+    });
+
+    saveData();
+
+    renderAppointments();
+
+    updateDashboard();
+
+    document.getElementById("appointmentReason").value = "";
+
+    toast("Appointment booked successfully.");
+
+};
+
+
+function renderAppointments(){
+
+    const table =
+        document.getElementById("appointmentTable");
+
+    if(!table) return;
+
+    let list;
+
+    if(window.currentRole === "admin"){
+
+        list = appointments;
+
+    }else{
+
+        list =
+            appointments.filter(
+                a => a.user === window.currentUser
+            );
+
+    }
+
+    if(list.length === 0){
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="5" class="empty">
+                    No appointments yet.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+    table.innerHTML =
+        list.map(a => `
+
+        <tr>
+
+            <td>${a.doctor}</td>
+
+            <td>${a.date}</td>
+
+            <td>${a.time}</td>
+
+            <td>₹${a.fee}</td>
+
+            <td>
+                <span class="badge">
+                    ${a.status}
+                </span>
+            </td>
+
+        </tr>
+
+        `).join("");
+
+}
+
+window.renderAppointments = renderAppointments;
+
+
+/* ================= PHARMACY ================= */
+
+window.renderPharmacy = function(){
+
+    const grid =
+        document.getElementById("pharmacyGrid");
+
+    if(!grid) return;
+
+    const search =
+        (document.getElementById("medicineSearch")?.value || "")
+        .toLowerCase();
+
+    const filtered =
+        medicines.filter(m =>
+            m.name.toLowerCase().includes(search) ||
+            m.category.toLowerCase().includes(search) ||
+            m.pharmacy.toLowerCase().includes(search)
+        );
+
+    if(filtered.length === 0){
+
+        grid.innerHTML =
+            '<div class="empty">No medicines found.</div>';
+
+        return;
+
+    }
+
+    grid.innerHTML =
+        filtered.map(m => `
+
+        <div class="medicine-card">
+
+            <div class="doctor-icon">💊</div>
+
+            <h3>${m.name}</h3>
+
+            <div class="doctor-info">
+                <b>Category:</b> ${m.category}<br>
+                <b>Pharmacy:</b> ${m.pharmacy}<br>
+                <span style="color:${m.prescriptionRequired ? '#d36b00' : '#138a54'};font-weight:700;">
+                    ${m.prescriptionRequired ? '⚠ Prescription may be required' : '✓ OTC / general-use item'}
+                </span>
+            </div>
+
+            <div class="price">
+                ₹${m.price}
+            </div>
+
+            <button
+                class="btn btn-primary"
+                onclick="addToCart(${m.id})">
+                🛒 Add to Cart
+            </button>
+
+        </div>
+
+        `).join("");
+
+};
+
+
+/* ================= CART ================= */
+
+window.addToCart = function(id){
+
+    const medicine =
+        medicines.find(m=>m.id === id);
+
+    if(!medicine) return;
+
+    const existing =
+        cart.find(item=>item.id === id);
+
+    if(existing){
+
+        existing.quantity++;
+
+    }else{
+
+        cart.push({
+
+            id:medicine.id,
+            name:medicine.name,
+            price:medicine.price,
+            pharmacy:medicine.pharmacy,
+            quantity:1
+
+        });
+
+    }
+
+    saveData();
+
+    renderCart();
+
+    updateDashboard();
+
+    toast(
+        medicine.name + " added to cart."
+    );
+
+};
+
+
+function renderCart(){
+
+    const container =
+        document.getElementById("cartItems");
+
+    if(!container) return;
+
+    if(cart.length === 0){
+
+        container.innerHTML =
+            '<div class="empty">Your cart is empty.</div>';
+
+        document.getElementById("cartTotal").textContent =
+            "₹0";
+
+        updateCartCount();
+
+        return;
+    }
+
+    container.innerHTML =
+        cart.map(item => `
+
+        <div class="cart-item">
+
+            <div>
+
+                <strong>${item.name}</strong>
+
+                <div style="color:#71858a;font-size:13px;">
+                    ${item.pharmacy}
+                </div>
+
+                <div style="margin-top:5px;">
+                    ₹${item.price} × ${item.quantity}
+                </div>
+
+            </div>
+
+            <div class="qty">
+
+                <button
+                    onclick="changeQuantity(${item.id},-1)">
+                    −
+                </button>
+
+                <strong>${item.quantity}</strong>
+
+                <button
+                    onclick="changeQuantity(${item.id},1)">
+                    +
+                </button>
+
+                <button
+                    style="background:#ffe9e9;color:#d93636;"
+                    onclick="removeFromCart(${item.id})">
+                    ×
+                </button>
+
+            </div>
+
+        </div>
+
+        `).join("");
+
+    const total =
+        cart.reduce(
+            (sum,item)=>
+                sum + item.price * item.quantity,
+            0
+        );
+
+    document.getElementById("cartTotal").textContent =
+        "₹" + total;
+
+    updateCartCount();
+
+}
+
+
+window.changeQuantity = function(id,change){
+
+    const item =
+        cart.find(i=>i.id === id);
+
+    if(!item) return;
+
+    item.quantity += change;
+
+    if(item.quantity <= 0){
+
+        cart =
+            cart.filter(i=>i.id !== id);
+
+    }
+
+    saveData();
+
+    renderCart();
+
+    updateDashboard();
+
+};
+
+
+window.removeFromCart = function(id){
+
+    cart =
+        cart.filter(i=>i.id !== id);
+
+    saveData();
+
+    renderCart();
+
+    updateDashboard();
+
+    toast("Item removed from cart.");
+
+};
+
+
+function getCartSubtotal(){
+    return cart.reduce((sum,item)=>sum + item.price * item.quantity, 0);
+}
+
+function getDeliveryFee(subtotal){
+    if(subtotal <= 0 || subtotal > 999) return 0;
+    const km = Math.max(0, Number(document.getElementById("deliveryDistance")?.value || 0));
+    return 25 + (km * 3.5);
+}
+
+function updateCartTotals(){
+    const subtotal = getCartSubtotal();
+    const fee = getDeliveryFee(subtotal);
+    const total = subtotal + fee;
+    const free = subtotal > 999;
+
+    const subtotalEl=document.getElementById("cartSubtotal");
+    const feeEl=document.getElementById("deliveryFee");
+    const offerEl=document.getElementById("deliveryOffer");
+    const payableEl=document.getElementById("cartPayableTotal");
+    const totalEl=document.getElementById("cartTotal");
+    if(subtotalEl) subtotalEl.textContent="₹"+subtotal.toFixed(2);
+    if(feeEl) feeEl.textContent=free ? "FREE" : "₹"+fee.toFixed(2);
+    if(offerEl) {
+        offerEl.textContent = free ? "🎉 Free delivery above ₹999" : "Delivery charged by distance";
+        offerEl.className = free ? "delivery-free" : "";
+    }
+    if(payableEl) payableEl.textContent="₹"+total.toFixed(2);
+    if(totalEl) totalEl.textContent="₹"+total.toFixed(2);
+    return {subtotal,fee,total,free};
+}
+
+function updateCartCount(){
+    const count = cart.reduce((sum,item)=>sum+item.quantity,0);
+    const a=document.getElementById("cartCount");
+    const b=document.getElementById("dashboardCartCount");
+    if(a) a.textContent=count;
+    if(b) b.textContent=count;
+    updateCartTotals();
+}
+
+window.changeQuantity = function(id,change){
+    const item=cart.find(i=>i.id===id);
+    if(!item) return;
+    item.quantity += change;
+    if(item.quantity<=0) cart=cart.filter(i=>i.id!==id);
+    saveData();
+    renderCart();
+    updateDashboard();
+};
+
+window.removeFromCart = function(id){
+    cart=cart.filter(i=>i.id!==id);
+    saveData();
+    renderCart();
+    updateDashboard();
+    toast("Item removed from cart.");
+};
+
+/* ================= PAYMENTS ================= */
+const DEFAULT_UPI_ID = "";
+const MEDINEST_PAYEE_NAME = "Medinest";
+let currentPaymentTotal = 0;
+let currentUpiLink = "";
+
+function getConfiguredUpi(){
+    return (adminPaymentSettings.upiId || DEFAULT_UPI_ID || "").trim();
+}
+function getConfiguredRazorpayKey(){
+    return (adminPaymentSettings.razorpayKeyId || "").trim();
+}
+
+function buildUpiLink(total){
+    const upi=getConfiguredUpi();
+    if(!upi) return "";
+    const params=new URLSearchParams({pa:upi,pn:MEDINEST_PAYEE_NAME,am:Number(total).toFixed(2),cu:"INR",tn:"Medinest order"});
+    return "upi://pay?"+params.toString();
+}
+
+window.checkout = function(){
+    if(cart.length===0){toast("Your cart is empty.");return;}
+    const totals=updateCartTotals();
+    currentPaymentTotal=totals.total;
+    currentUpiLink=buildUpiLink(currentPaymentTotal);
+    document.getElementById("paymentTotal").textContent="₹"+currentPaymentTotal.toFixed(2);
+    document.getElementById("merchantUpiText").textContent=getConfiguredUpi() || "Admin must configure UPI ID";
+    const qrBox=document.getElementById("upiQr");
+    qrBox.innerHTML="";
+    if(window.QRCode){
+        new QRCode(qrBox,{text:"MEDINEST-DEMO-PAYMENT-"+currentPaymentTotal.toFixed(2),width:210,height:210,correctLevel:QRCode.CorrectLevel.H});
+    }else{ qrBox.innerHTML='<div class="empty">Demo QR code library unavailable.</div>'; }
+    const choice=document.getElementById("paymentChoice"); if(choice) choice.value="online";
+    updatePaymentChoice();
+    document.getElementById("paymentModal").classList.add("show");
+};
+
+window.updatePaymentChoice=function(){
+    const cod=document.getElementById("paymentChoice")?.value==="cod";
+    const totals=updateCartTotals();
+    currentPaymentTotal=totals.total+(cod && totals.subtotal>0 ? 10 : 0);
+    const amount=document.getElementById("paymentTotal"); if(amount) amount.textContent="₹"+currentPaymentTotal.toFixed(2);
+    const notice=document.getElementById("demoQrNotice"); if(notice) notice.textContent=cod ? "COD selected: ₹10 extra charge added. Demo only." : "Demo QR only — no real payment is collected.";
+    const qr=document.getElementById("upiQr");
+    if(qr && window.QRCode && !cod){qr.innerHTML="";new QRCode(qr,{text:"MEDINEST-DEMO-PAYMENT-"+currentPaymentTotal.toFixed(2),width:210,height:210,correctLevel:QRCode.CorrectLevel.H});}
+    if(qr && cod) qr.innerHTML='<div class="empty">Cash on Delivery selected<br>Extra charge: ₹10</div>';
+};
+window.openUpiApp = function(appName){
+    if(document.getElementById("paymentChoice")?.value==="cod"){
+        confirmPrototypePayment();
+        return;
+    }
+    // This website uses a demo QR. It must not attempt a real UPI transfer.
+    alert("Demo payment only. No real UPI transfer will be initiated.");
+};
+
+window.openRazorpay = function(){
+    if(cart.length===0){toast("Your cart is empty.");return;}
+    if(document.getElementById("paymentChoice")?.value==="cod") { confirmPrototypePayment(); return; }
+    const totals=updateCartTotals();
+    currentPaymentTotal=totals.total;
+    const key=getConfiguredRazorpayKey();
+    if(!window.Razorpay || !key){
+        alert("Administrator must save a Razorpay Key ID in Manage System. The Razorpay merchant account must be linked to the administrator's settlement bank account.");
+        return;
+    }
+    const options={
+        key:key,
+        amount:Math.round(currentPaymentTotal*100),
+        currency:"INR",
+        name:MEDINEST_PAYEE_NAME,
+        description:"Medinest medicine order including delivery",
+        handler:function(response){
+            const total=currentPaymentTotal;
+            cart=[]; saveData(); renderCart(); updateDashboard(); closePaymentModal();
+            alert("Payment successful!\nPayment ID: "+response.razorpay_payment_id+"\nAmount: ₹"+total.toFixed(2));
+        },
+        prefill:{name:profile.name||"",email:profile.email||"",contact:(window.currentUser||"").replace(/\D/g,"").slice(-10)},
+        theme:{color:"#087f82"},
+        modal:{ondismiss:function(){toast("Payment window closed.");}},
+        notes:{source:"Medinest cart",deliveryDistance:String(document.getElementById("deliveryDistance")?.value || 2)}
+    };
+    const rzp=new Razorpay(options);
+    rzp.on('payment.failed',function(){toast("Payment failed. Please try another method.");});
+    rzp.open();
+};
+
+window.closePaymentModal=function(){document.getElementById("paymentModal").classList.remove("show");};
+window.paymentBackdropClose=function(event){if(event.target.id==="paymentModal") closePaymentModal();};
+
+window.confirmPrototypePayment=function(){
+    if(cart.length===0) return;
+    const totals=updateCartTotals();
+    const cod=document.getElementById("paymentChoice")?.value==="cod";
+    const total=totals.total+(cod && totals.subtotal>0 ? 10 : 0);
+    medinestOrders.push({
+        id:Date.now(),
+        date:new Date().toLocaleString(),
+        items:cart.map(i=>i.name+" × "+i.quantity).join(", "),
+        subtotal:totals.subtotal,
+        deliveryFee:totals.fee,
+        codFee:cod && totals.subtotal>0 ? 10 : 0,
+        total:total,
+        payment:cod?"COD":"Demo QR"
+    });
+    saveData(); renderAdmin();
+    alert("Prototype only — no money was transferred.\n\n"+(cod?"COD fee: ₹10\n":"")+"Total: ₹"+total.toFixed(2)+"\n\nFor real collection, configure the administrator's verified UPI ID or Razorpay merchant account.");
+};
+
+
+/* ================= PROFILE ================= */
+
+function loadProfile(){
+
+    document.getElementById("profilePhone").value =
+        window.currentRole === "admin"
+        ? "Administrator"
+        : (window.currentUser || "");
+
+    document.getElementById("profileName").value =
+        profile.name || "";
+
+    document.getElementById("profileEmail").value =
+        profile.email || "";
+
+    document.getElementById("profileAge").value =
+        profile.age || "";
+
+    setProfileEditMode(false);
+
+}
+
+function setProfileEditMode(editing){
+
+    ["profileName","profileEmail","profileAge"].forEach(function(id){
+        document.getElementById(id).readOnly = !editing;
+    });
+
+    document.getElementById("editProfileBtn").style.display =
+        editing ? "none" : "inline-block";
+
+    document.getElementById("saveProfileBtn").style.display =
+        editing ? "inline-block" : "none";
+}
+
+window.editProfile = function(){
+    setProfileEditMode(true);
+    document.getElementById("profileName").focus();
+    toast("You can now edit your profile.");
+};
+
+window.saveProfile = function(){
+
+    const name = document.getElementById("profileName").value.trim();
+    const email = document.getElementById("profileEmail").value.trim();
+    const age = document.getElementById("profileAge").value.trim();
+
+    if(!name){
+        toast("Please enter your full name.");
+        document.getElementById("profileName").focus();
+        return;
+    }
+
+    if(email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+        toast("Please enter a valid email address.");
+        document.getElementById("profileEmail").focus();
+        return;
+    }
+
+    if(age && (Number(age) < 1 || Number(age) > 120)){
+        toast("Please enter a valid age.");
+        document.getElementById("profileAge").focus();
+        return;
+    }
+
+    profile = {
+        name: name,
+        email: email,
+        age: age
+    };
+
+    saveData();
+    updateHeader();
+    setProfileEditMode(false);
+    document.getElementById("profileAvatar").textContent =
+        name.charAt(0).toUpperCase();
+
+    toast("Profile updated successfully.");
+
+};
+
+
+/* ================= ADMIN PAYMENT SETTINGS ================= */
+function renderAdminPaymentSettings(){
+    const ids=["adminAccountHolder","adminBankName","adminAccountNumber","adminIfsc","adminUpiId","adminRazorpayKey"];
+    if(!document.getElementById(ids[0])) return;
+    document.getElementById("adminAccountHolder").value=adminPaymentSettings.accountHolder||"";
+    document.getElementById("adminBankName").value=adminPaymentSettings.bankName||"";
+    document.getElementById("adminAccountNumber").value=adminPaymentSettings.accountNumber||"";
+    document.getElementById("adminIfsc").value=adminPaymentSettings.ifsc||"";
+    document.getElementById("adminUpiId").value=adminPaymentSettings.upiId||"";
+    document.getElementById("adminRazorpayKey").value=adminPaymentSettings.razorpayKeyId||"";
+    const u=document.getElementById("adminUpiDisplay"); if(u) u.textContent=adminPaymentSettings.upiId||"Not configured";
+    const b=document.getElementById("adminBankDisplay"); if(b) b.textContent=(adminPaymentSettings.bankName||"Not configured")+((adminPaymentSettings.ifsc)?" • "+adminPaymentSettings.ifsc:"");
+    const a=document.getElementById("adminAccountDisplay"); if(a){const n=adminPaymentSettings.accountNumber||""; a.textContent=n ? "••••"+n.slice(-4) : "Not configured";}
+}
+
+window.saveAdminPaymentSettings=function(){
+    if(window.currentRole!=="admin"){toast("Administrator access required.");return;}
+    const upi=document.getElementById("adminUpiId").value.trim();
+    const key=document.getElementById("adminRazorpayKey").value.trim();
+    if(upi && !/^[\w.\-]{2,}@[\w.\-]{2,}$/.test(upi)){toast("Enter a valid UPI ID, for example name@upi.");return;}
+    if(key && !/^rzp_(test|live)_[A-Za-z0-9]+$/.test(key)){toast("Enter a valid Razorpay Key ID.");return;}
+    adminPaymentSettings={
+        accountHolder:document.getElementById("adminAccountHolder").value.trim(),
+        bankName:document.getElementById("adminBankName").value.trim(),
+        accountNumber:document.getElementById("adminAccountNumber").value.trim(),
+        ifsc:document.getElementById("adminIfsc").value.trim().toUpperCase(),
+        upiId:upi,
+        razorpayKeyId:key
+    };
+    saveData();
+    renderAdminPaymentSettings();
+    toast("Administrator payment settings saved.");
+};
+window.loadAdminPaymentSettings=function(){renderAdminPaymentSettings();toast("Payment settings loaded.");};
+
+/* ================= ADMIN ================= */
+
+function renderAdmin(){
+
+    const doctorBox =
+        document.getElementById("adminDoctors");
+
+    const medicineBox =
+        document.getElementById("adminMedicines");
+
+    if(!doctorBox || !medicineBox) return;
+
+    if(window.currentRole !== "admin"){
+
+        document.getElementById("adminMenu").style.display =
+            "none";
+
+        return;
+
+    }
+
+    document.getElementById("adminMenu").style.display =
+        "block";
+
+
+    doctorBox.innerHTML =
+        doctors.map(d => `
+
+        <div style="
+            padding:15px 0;
+            border-bottom:1px solid #e5eeee;
+        ">
+
+            <strong>${d.name}</strong>
+
+            <span style="color:#71858a;">
+                — ${d.speciality}
+            </span>
+
+            <br>
+
+            Fee:
+            <strong>₹${d.fee}</strong>
+
+            <button
+                class="btn"
+                style="background:#e8f5f3;color:#087c78;margin-left:10px;"
+                onclick="changeDoctorFee(${d.id})">
+                Change Fee
+            </button>
+
+            <button
+                class="btn"
+                style="background:#ffe9e9;color:#d93636;margin-left:5px;"
+                onclick="deleteDoctor(${d.id})">
+                Delete
+            </button>
+
+        </div>
+
+        `).join("");
+
+
+    medicineBox.innerHTML =
+        medicines.map(m => `
+
+        <div style="
+            padding:15px 0;
+            border-bottom:1px solid #e5eeee;
+        ">
+
+            <strong>${m.name}</strong>
+
+            <span style="color:#71858a;">
+                — ₹${m.price}
+            </span>
+
+            <button
+                class="btn"
+                style="background:#ffe9e9;color:#d93636;margin-left:10px;"
+                onclick="deleteMedicine(${m.id})">
+                Delete
+            </button>
+
+        </div>
+
+        `).join("");
+
+    renderAdminPaymentSettings();
+
+}
+
+
+window.addDoctor = function(){
+
+    const name =
+        document.getElementById("newDoctorName").value.trim();
+
+    const speciality =
+        document.getElementById("newDoctorSpeciality").value.trim();
+
+    const experience =
+        document.getElementById("newDoctorExperience").value.trim();
+
+    const hospital =
+        document.getElementById("newDoctorHospital").value.trim();
+
+    const timing =
+        document.getElementById("newDoctorTiming").value.trim();
+
+    const rating =
+        document.getElementById("newDoctorRating").value.trim();
+
+    const fee =
+        Number(
+            document.getElementById("newDoctorFee").value
+        );
+
+    if(!name || !speciality || !fee){
+
+        toast("Please enter doctor name, speciality and fee.");
+        return;
+
+    }
+
+    doctors.push({
+
+        id:Date.now(),
+
+        name:name,
+
+        speciality:speciality,
+
+        experience:experience || "New",
+
+        hospital:hospital || "Medinest Clinic",
+
+        timing:timing || "9 AM - 5 PM",
+
+        rating:rating || "4.5",
+
+        fee:fee
+
+    });
+
+    saveData();
+
+    renderDoctors();
+
+    renderDoctorSelect();
+
+    renderAdmin();
+
+    document.querySelectorAll("#admin input")
+        .forEach(input=>input.value="");
+
+    toast("Doctor added successfully.");
+
+};
+
+
+window.changeDoctorFee = function(id){
+
+    const doctor =
+        doctors.find(d=>d.id === id);
+
+    if(!doctor) return;
+
+    const newFee =
+        prompt(
+            "Enter new appointment fee for " +
+            doctor.name,
+            doctor.fee
+        );
+
+    if(newFee === null) return;
+
+    const fee =
+        Number(newFee);
+
+    if(!fee || fee < 0){
+
+        toast("Invalid fee.");
+        return;
+
+    }
+
+    doctor.fee = fee;
+
+    saveData();
+
+    renderDoctors();
+
+    renderDoctorSelect();
+
+    renderAdmin();
+
+    toast("Appointment fee updated.");
+
+};
+
+
+window.deleteDoctor = function(id){
+
+    if(!confirm("Delete this doctor?")) return;
+
+    doctors =
+        doctors.filter(d=>d.id !== id);
+
+    saveData();
+
+    renderDoctors();
+
+    renderDoctorSelect();
+
+    renderAdmin();
+
+    toast("Doctor deleted.");
+
+};
+
+
+window.addMedicine = function(){
+
+    const name =
+        document.getElementById("newMedicineName").value.trim();
+
+    const category =
+        document.getElementById("newMedicineCategory").value.trim();
+
+    const price =
+        Number(
+            document.getElementById("newMedicinePrice").value
+        );
+
+    const pharmacy =
+        document.getElementById("newMedicinePharmacy").value.trim();
+
+    if(!name || !price){
+
+        toast("Please enter medicine name and price.");
+        return;
+
+    }
+
+    medicines.push({
+
+        id:Date.now(),
+
+        name:name,
+
+        category:category || "General",
+
+        price:price,
+
+        pharmacy:pharmacy || "Medinest Pharmacy"
+
+    });
+
+    saveData();
+
+    renderPharmacy();
+
+    renderAdmin();
+
+    document.getElementById("newMedicineName").value="";
+    document.getElementById("newMedicineCategory").value="";
+    document.getElementById("newMedicinePrice").value="";
+    document.getElementById("newMedicinePharmacy").value="";
+
+    toast("Medicine added successfully.");
+
+};
+
+
+window.deleteMedicine = function(id){
+
+    if(!confirm("Delete this medicine?")) return;
+
+    medicines =
+        medicines.filter(m=>m.id !== id);
+
+    cart =
+        cart.filter(c=>c.id !== id);
+
+    saveData();
+
+    renderPharmacy();
+
+    renderCart();
+
+    renderAdmin();
+
+    updateDashboard();
+
+    toast("Medicine deleted.");
+
+};
+
+
+/* ================= DASHBOARD ================= */
+
+function updateDashboard(){
+
+    const visibleAppointments =
+        window.currentRole === "admin"
+        ? appointments.length
+        : appointments.filter(
+            a=>a.user === window.currentUser
+        ).length;
+
+    document.getElementById("appointmentCount").textContent =
+        visibleAppointments;
+
+    updateCartCount();
+
+    const reminderCount = document.getElementById("reminderCount");
+    if(reminderCount) reminderCount.textContent = reminders.length;
+
+}
+
+
+/* ================= MEDICINE REMINDERS ================= */
+function reminderKey(reminder){
+    return String(reminder.id) + "_" + new Date().toISOString().slice(0,10);
+}
+
+window.addMedicineReminder = function(){
+    const medicine = document.getElementById("reminderMedicine").value.trim();
+    const dosage = document.getElementById("reminderDosage").value.trim();
+    const time = document.getElementById("reminderTime").value;
+    const date = document.getElementById("reminderDate").value;
+    const frequency = document.getElementById("reminderFrequency").value;
+    const familyName = document.getElementById("familyName").value.trim();
+    const familyPhone = document.getElementById("familyPhone").value.trim();
+
+    if(!medicine || !dosage || !time || !date){
+        toast("Please fill medicine, dosage, time and start date.");
+        return;
+    }
+    if(familyPhone && !/^[0-9]{10}$/.test(familyPhone)){
+        toast("Enter a valid 10-digit family mobile number.");
+        return;
+    }
+
+    reminders.push({
+        id:Date.now(), medicine, dosage, time, date, frequency, familyName, familyPhone, taken:false
+    });
+    saveData();
+    renderReminders();
+    updateDashboard();
+
+    ["reminderMedicine","reminderDosage","reminderTime","reminderDate","familyName","familyPhone"].forEach(id=>document.getElementById(id).value="");
+    toast("Medicine reminder added successfully.");
+};
+
+window.markReminderTaken = function(id){
+    const r = reminders.find(x=>x.id===id);
+    if(!r) return;
+    r.taken = true;
+    r.lastTaken = new Date().toISOString();
+    saveData();
+    renderReminders();
+    toast(r.medicine + " marked as taken.");
+};
+
+window.deleteReminder = function(id){
+    reminders = reminders.filter(x=>x.id!==id);
+    saveData();
+    renderReminders();
+    updateDashboard();
+    toast("Reminder deleted.");
+};
+
+window.sendFamilyAlert = function(id){
+    const r = reminders.find(x=>x.id===id);
+    if(!r || !r.familyPhone){
+        toast("Add a family mobile number first.");
+        return;
+    }
+    const msg = "Medinest alert: " + r.medicine + " (" + r.dosage + ") was missed. Please check on the patient.";
+    window.location.href = "sms:+91" + r.familyPhone + "?body=" + encodeURIComponent(msg);
+};
+
+function renderReminders(){
+    const box = document.getElementById("reminderList");
+    if(!box) return;
+    if(reminders.length===0){
+        box.innerHTML='<div class="empty">No medicine reminders added yet.</div>';
+        return;
+    }
+    box.innerHTML = reminders.map(r=>`
+        <div class="reminder-card">
+            <h3>💊 ${r.medicine}</h3>
+            <div class="reminder-meta">
+                <b>Dosage:</b> ${r.dosage}<br>
+                <b>Time:</b> ${r.time}<br>
+                <b>Start:</b> ${r.date}<br>
+                <b>Frequency:</b> ${r.frequency}<br>
+                <b>Family contact:</b> ${r.familyName || "Not added"}${r.familyPhone ? " (+91 " + r.familyPhone + ")" : ""}
+            </div>
+            <div class="reminder-actions">
+                <button class="btn btn-primary" onclick="markReminderTaken(${r.id})">✓ Dose Taken</button>
+                <button class="btn btn-secondary" onclick="sendFamilyAlert(${r.id})">📩 Alert Family</button>
+                <button class="btn" style="background:#ffe9e9;color:#d93636;" onclick="deleteReminder(${r.id})">Delete</button>
+            </div>
+        </div>`).join("");
+}
+
+function checkMedicationReminders(){
+    if(!reminders.length) return;
+    const now = new Date();
+    const hhmm = now.toTimeString().slice(0,5);
+    const today = now.toISOString().slice(0,10);
+    reminders.forEach(r=>{
+        if(r.date===today && r.time===hhmm && r.lastNotified!==today+hhmm){
+            r.lastNotified = today+hhmm;
+            saveData();
+            toast("⏰ Medicine reminder: " + r.medicine + " — " + r.dosage);
+            if("Notification" in window && Notification.permission==="granted") new Notification("Medinest Medicine Reminder",{body:r.medicine+" — "+r.dosage});
+        }
+    });
+}
+
+if("Notification" in window && Notification.permission==="default"){
+    setTimeout(()=>Notification.requestPermission().catch(()=>{}),1500);
+}
+setInterval(checkMedicationReminders,30000);
+
+
+/* ================= EMERGENCY ================= */
+
+window.callEmergency = function(){
+
+    window.location.href = "tel:112";
+
+};
+
+
+/* ================= FIREBASE ERROR ================= */
+
+function getFirebaseError(error){
+
+    if(!error) return "Something went wrong.";
+
+    const code = error.code || "";
+
+    if(code.includes("invalid-phone-number"))
+        return "Invalid mobile number.";
+
+    if(code.includes("too-many-requests"))
+        return "Too many attempts. Please try again later.";
+
+    if(code.includes("quota-exceeded"))
+        return "Firebase SMS daily quota has been reached.";
+
+    if(code.includes("captcha-check-failed"))
+        return "reCAPTCHA verification failed. Please try again.";
+
+    if(code.includes("invalid-verification-code"))
+        return "Incorrect OTP. Please check and try again.";
+
+    if(code.includes("session-expired"))
+        return "OTP expired. Please request a new OTP.";
+
+    if(code.includes("operation-not-allowed"))
+        return "Phone authentication is not enabled in Firebase.";
+
+    return error.message || "Unable to complete login.";
+
+}
+
+
+/* ================= LOGOUT ================= */
+
+window.logout = async function(){
+
+    try{
+
+        if(window.currentRole === "user"){
+
+            await signOut(auth);
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+    window.currentUser = null;
+    window.currentRole = null;
+
+    localStorage.removeItem("medinest_admin");
+    localStorage.removeItem("medinest_role");
+
+    document.getElementById("app").style.display = "none";
+
+    document.getElementById("loginScreen").style.display =
+        "flex";
+
+    showUserLogin();
+
+    resetOTP();
+
+    document.getElementById("phoneNumber").value = "";
+
+    toast("Logged out successfully.");
+
+};
+
+
+/* ================= DEMO LOGIN STATE ================= */
+// Patient login currently uses the temporary demo OTP 123456.
+// Firebase configuration remains in the project for future restoration.
+
+
+/* ================= ADMIN SESSION ================= */
+
+if(
+    localStorage.getItem("medinest_admin") === "true"
+){
+
+    window.currentUser = "Administrator";
+
+    window.currentRole = "admin";
+
+    showApplication();
+
+}
+
+
+/* ================= INITIAL RENDER ================= */
+
+renderDoctors();
+
+renderPharmacy();
+
+renderCart();
+renderReminders();
+
+
+// Medinest reminder enhancements: local dose history and browser notification permission.
+window.enableMedicineNotifications = async function(){
+    if(!("Notification" in window)){
+        toast("This browser does not support notifications.");
+        return;
+    }
+    try{
+        const permission = await Notification.requestPermission();
+        toast(permission === "granted" ? "Browser notifications enabled." :
+              "Notifications were not enabled. You can still see reminders in the website.");
+    }catch(e){
+        toast("Could not request notification permission.");
+    }
+};
+
+window.renderReminderHistory = function(){
+    const box = document.getElementById("reminderHistory");
+    if(!box) return;
+    const history = JSON.parse(localStorage.getItem("medinest_dose_history") || "[]");
+    if(!history.length){
+        box.innerHTML = '<div class="empty">No doses recorded yet. Use “Dose Taken” on a reminder to create history.</div>';
+        return;
+    }
+    box.innerHTML = history.slice(0,20).map(item => `
+        <div class="reminder-card">
+            <strong>💊 ${String(item.medicine || "").replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}</strong>
+            <div class="reminder-meta">${String(item.dosage || "")} · Taken ${new Date(item.takenAt).toLocaleString()}</div>
+        </div>`).join("");
+};
+
+const medReminderOriginalMarkTaken = window.markReminderTaken;
+window.markReminderTaken = function(id){
+    const r = (typeof reminders !== "undefined") ? reminders.find(x=>x.id===id) : null;
+    if(!r) return;
+    const history = JSON.parse(localStorage.getItem("medinest_dose_history") || "[]");
+    history.unshift({medicine:r.medicine, dosage:r.dosage, takenAt:new Date().toISOString(), reminderId:r.id});
+    localStorage.setItem("medinest_dose_history", JSON.stringify(history.slice(0,100)));
+    medReminderOriginalMarkTaken(id);
+    window.renderReminderHistory();
+};
+
+const medReminderOriginalRender = window.renderReminders;
+window.renderReminders = function(){
+    medReminderOriginalRender();
+    window.renderReminderHistory();
+};
+
+</script>
+
+</body>
+</html>
